@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الندى بلاست | Al-Nada Plast</title>
+    <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="1000412269_2.jpg">
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -12,97 +14,150 @@
             theme: { extend: { fontFamily: { sans: ['Cairo', 'sans-serif'] } } }
         }
     </script>
+    <!-- Icons & Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap');
         .lang-en { display: none; }
-        body { transition: background-color 0.4s ease; background: radial-gradient(circle at top, #e2e8f0 0%, #cbd5e0 100%); }
-        .dark body { background: radial-gradient(circle at top, #1a202c 0%, #0f172a 100%); }
-        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.4); }
-        .dark .glass { background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 255, 255, 0.05); }
+        body { transition: background-color 0.4s ease; background-color: #f8fafc; }
+        .dark body { background-color: #0f172a; }
+        .nav-glass { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.7); }
+        .dark .nav-glass { background: rgba(30, 41, 59, 0.7); }
+        .section-card { background: white; transition: all 0.3s ease; }
+        .dark .section-card { background: #1e293b; }
     </style>
 </head>
-<body class="min-h-screen p-4 flex justify-center items-center font-sans">
+<body class="font-sans text-gray-900 dark:text-gray-100">
 
-    <!-- Card Container -->
-    <div class="glass max-w-sm w-full rounded-[3rem] shadow-2xl overflow-hidden p-6">
-        
-        <!-- Header -->
-        <div class="flex justify-between items-center mb-6">
-            <button onclick="toggleTheme()" class="w-12 h-12 rounded-2xl bg-black/5 dark:bg-white/10 flex items-center justify-center hover:scale-110 transition">
-                <i id="theme-icon" class="fa-solid fa-moon dark:text-yellow-400"></i>
-            </button>
-            <button onclick="toggleLang()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-xs font-bold shadow-lg transition">
-                <span id="lang-btn">English</span>
-            </button>
+    <!-- Sticky Header -->
+    <header class="nav-glass fixed top-0 w-full z-50 border-b border-gray-200 dark:border-gray-700 p-4">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">الندى بلاست</h1>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                </button>
+                <button onclick="toggleLang()" class="px-4 py-1 bg-blue-600 text-white rounded-lg text-sm font-bold hover:bg-blue-700 transition">
+                    <span id="lang-btn">English</span>
+                </button>
+            </div>
         </div>
+    </header>
 
-        <!-- Logo & Branding -->
-        <div class="text-center mb-8">
-            <img src="1000412269_2.jpg" alt="Logo" class="w-28 h-28 mx-auto rounded-3xl shadow-xl ring-4 ring-white dark:ring-slate-700 mb-6">
-            <h1 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-2">
-                <span class="lang-ar">الندى بلاست</span>
-                <span class="lang-en">Al-Nada Plast</span>
-            </h1>
-            <p class="text-gray-500 dark:text-gray-400 text-sm font-medium">
-                <span class="lang-ar">تغليف | تعبئة | مطبوعات</span>
-                <span class="lang-en">Packaging & Print Solutions</span>
-            </p>
-        </div>
+    <!-- Hero Section -->
+    <main class="max-w-5xl mx-auto pt-24 px-6 pb-12">
+        <section class="flex flex-col md:flex-row items-center gap-8 mb-16">
+            <div class="flex-1">
+                <img src="1000412269_2.jpg" alt="Logo" class="w-48 h-48 rounded-3xl shadow-2xl mx-auto md:mx-0">
+            </div>
+            <div class="flex-1 text-center md:text-right">
+                <h2 class="text-4xl font-extrabold mb-4">
+                    <span class="lang-ar">الندى بلاست - للتجارة والتوزيع</span>
+                    <span class="lang-en">Al-Nada Plast - Trading & Distribution</span>
+                </h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">
+                    <span class="lang-ar">نحن متخصصون في توفير أفضل حلول مواد التعبئة والتغليف والمطبوعات الورقية عالية الجودة منذ عام 1996. التزامنا هو تقديم خدمة متميزة لعملائنا في كافة أنحاء الجمهورية.</span>
+                    <span class="lang-en">We specialize in providing high-quality packaging solutions and paper prints since 1996. Our commitment is to offer excellent service to our clients nationwide.</span>
+                </p>
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                    <a href="https://maps.app.goo.gl/azVw1khGMuYoV8xd9" target="_blank" class="px-6 py-3 bg-red-500 text-white rounded-xl font-bold flex items-center gap-2 hover:bg-red-600 transition">
+                        <i class="fa-solid fa-location-dot"></i> <span class="lang-ar">موقعنا</span><span class="lang-en">Location</span>
+                    </a>
+                    <button onclick="showComingSoon()" class="px-6 py-3 bg-green-600 text-white rounded-xl font-bold flex items-center gap-2 hover:bg-green-700 transition">
+                        <i class="fa-solid fa-cart-shopping"></i> <span class="lang-ar">متجرنا الإلكتروني</span><span class="lang-en">Online Shop</span>
+                    </button>
+                </div>
+            </div>
+        </section>
 
-        <!-- NEW: Quick Access Row (Map & Shopping) -->
-        <div class="grid grid-cols-2 gap-3 mb-6">
-            <a href="https://maps.app.goo.gl/azVw1khGMuYoV8xd9" target="_blank" class="flex flex-col items-center justify-center p-4 bg-white dark:bg-gray-700 rounded-2xl shadow-sm hover:shadow-md transition text-gray-700 dark:text-white">
-                <i class="fa-solid fa-map-location-dot text-lg mb-1 text-red-500"></i>
-                <span class="text-[10px] font-bold uppercase"><span class="lang-ar">الموقع</span><span class="lang-en">Location</span></span>
-            </a>
-            <button onclick="showComingSoon()" class="flex flex-col items-center justify-center p-4 bg-white dark:bg-gray-700 rounded-2xl shadow-sm hover:shadow-md transition text-gray-700 dark:text-white">
-                <i class="fa-solid fa-cart-shopping text-lg mb-1 text-green-500"></i>
-                <span class="text-[10px] font-bold uppercase"><span class="lang-ar">التسوق</span><span class="lang-en">Shopping</span></span>
+        <!-- Services Grid -->
+        <section class="grid md:grid-cols-2 gap-6 mb-16">
+            <!-- Delivery -->
+            <div class="section-card p-6 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700">
+                <div class="flex items-center gap-4 mb-4">
+                    <i class="fa-solid fa-truck-fast text-3xl text-orange-500"></i>
+                    <h3 class="text-xl font-bold"><span class="lang-ar">الطلب والتوصيل</span><span class="lang-en">Orders & Delivery</span></h3>
+                </div>
+                <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+                    <span class="lang-ar">لخدمة التوصيل السريع والمتابعة، يرجى التواصل معنا عبر الرقم التالي:</span>
+                    <span class="lang-en">For fast delivery services, please contact us at the following number:</span>
+                </p>
+                <button onclick="openActionModal('01112611103')" class="w-full py-3 bg-gray-900 dark:bg-white dark:text-gray-900 text-white rounded-xl font-bold text-lg hover:bg-gray-700 transition">
+                    01112611103
+                </button>
+            </div>
+
+            <!-- Sales -->
+            <div class="section-card p-6 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700">
+                <div class="flex items-center gap-4 mb-4">
+                    <i class="fa-solid fa-handshake text-3xl text-blue-500"></i>
+                    <h3 class="text-xl font-bold"><span class="lang-ar">المبيعات والمشتريات</span><span class="lang-en">Sales & Purchasing</span></h3>
+                </div>
+                <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+                    <span class="lang-ar">للاستفسارات التجارية، طلبات الجملة، أو التواصل مع قسم المبيعات:</span>
+                    <span class="lang-en">For trade inquiries, wholesale orders, or sales support:</span>
+                </p>
+                <button onclick="openActionModal('01044200047')" class="w-full py-3 bg-gray-900 dark:bg-white dark:text-gray-900 text-white rounded-xl font-bold text-lg hover:bg-gray-700 transition">
+                    01044200047
+                </button>
+            </div>
+        </section>
+
+        <!-- Payments Section -->
+        <section class="mb-16">
+            <h3 class="text-2xl font-bold text-center mb-8"><span class="lang-ar">طرق الدفع المتاحة</span><span class="lang-en">Payment Methods</span></h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- InstaPay -->
+                <div class="section-card p-6 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700 text-center">
+                    <div class="text-4xl mb-4 text-purple-600"><i class="fa-solid fa-wallet"></i></div>
+                    <h4 class="text-lg font-bold mb-2">InstaPay (انستا باي)</h4>
+                    <p class="text-sm text-gray-500 mb-4">01115949155</p>
+                    <a href="https://ipn.eg/C/Q/abdelnaby18/instapay?ISIGN=23052603MEUCIHyaG0WF5uuVOFh89P9/SUVcTD1tDGnywMjqlbrn3mESAiEAs6Nsk1CujAcE/zIKo2QuzeWQco50vBeiKZ14b+3Uk4Q=" target="_blank" class="inline-block px-8 py-3 bg-purple-600 text-white rounded-xl font-bold hover:bg-purple-700">
+                        <span class="lang-ar">تحويل الآن</span><span class="lang-en">Transfer Now</span>
+                    </a>
+                </div>
+                <!-- Vodafone Cash -->
+                <div class="section-card p-6 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700 text-center">
+                    <div class="text-4xl mb-4 text-red-600"><i class="fa-solid fa-money-bill-wave"></i></div>
+                    <h4 class="text-lg font-bold mb-2">Vodafone Cash (فودافون كاش)</h4>
+                    <p class="text-sm text-gray-500 mb-4">01027760090</p>
+                    <button onclick="copyOrCallDirect('01027760090')" class="inline-block px-8 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700">
+                        <span class="lang-ar">الدفع الآن</span><span class="lang-en">Pay Now</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer / Contact -->
+        <footer class="text-center p-8 bg-gray-200 dark:bg-gray-800 rounded-3xl">
+            <h3 class="text-xl font-bold mb-4"><span class="lang-ar">للشكاوى والمقترحات</span><span class="lang-en">Complaints & Suggestions</span></h3>
+            <p class="mb-6"><span class="lang-ar">نحن نهتم برأيك. لا تتردد في التواصل مع المدير مباشرة.</span><span class="lang-en">We value your opinion. Feel free to contact the manager directly.</span></p>
+            <button onclick="openActionModal('01027760090')" class="px-10 py-4 bg-white dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-600 rounded-2xl font-bold text-xl hover:border-blue-500 transition flex mx-auto items-center gap-3">
+                <i class="fa-solid fa-phone text-blue-600"></i> 01027760090
             </button>
-        </div>
+            
+            <div class="mt-8 pt-8 border-t border-gray-300 dark:border-gray-700">
+                <a href="https://www.facebook.com/share/1C1pKGFayp/" target="_blank" class="text-blue-600 font-bold flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-facebook"></i> Facebook Page
+                </a>
+            </div>
+        </footer>
+    </main>
 
-        <!-- Main Services -->
-        <div class="space-y-3 mb-6">
-            <button onclick="openActionModal('01112611103')" class="w-full flex items-center justify-between p-4 rounded-2xl bg-orange-500 text-white shadow-lg shadow-orange-500/20 active:scale-95 transition">
-                <span class="font-bold text-sm"><span class="lang-ar">الطلب والتوصيل</span><span class="lang-en">Orders & Delivery</span></span>
-                <span class="font-mono font-bold text-sm">01112611103</span>
-            </button>
-            <button onclick="openActionModal('01044200047')" class="w-full flex items-center justify-between p-4 rounded-2xl bg-blue-500 text-white shadow-lg shadow-blue-500/20 active:scale-95 transition">
-                <span class="font-bold text-sm"><span class="lang-ar">المبيعات والمشتريات</span><span class="lang-en">Sales & Trade</span></span>
-                <span class="font-mono font-bold text-sm">01044200047</span>
-            </button>
-            <a href="https://ipn.eg/C/Q/abdelnaby18/instapay?ISIGN=23052603MEUCIHyaG0WF5uuVOFh89P9/SUVcTD1tDGnywMjqlbrn3mESAiEAs6Nsk1CujAcE/zIKo2QuzeWQco50vBeiKZ14b+3Uk4Q=" target="_blank" class="w-full flex items-center justify-between p-4 rounded-2xl bg-purple-600 text-white shadow-lg shadow-purple-500/20 active:scale-95 transition">
-                <span class="font-bold text-sm">InstaPay (انستا باي)</span>
-                <span class="font-mono font-bold text-sm">01115949155</span>
-            </a>
-            <button onclick="copyOrCallDirect('01027760090')" class="w-full flex items-center justify-between p-4 rounded-2xl bg-red-600 text-white shadow-lg shadow-red-500/20 active:scale-95 transition">
-                <span class="font-bold text-sm">Vodafone Cash</span>
-                <span class="font-mono font-bold text-sm">01027760090</span>
-            </button>
-        </div>
-
-        <!-- Manager Support -->
-        <button onclick="openActionModal('01027760090')" class="w-full py-4 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-2xl text-gray-500 font-bold text-sm hover:border-blue-400 hover:text-blue-500 transition">
-            <span class="lang-ar">الشكاوى والمقترحات</span><span class="lang-en">Complaints & Suggestions</span>
-        </button>
-    </div>
-
-    <!-- Modals -->
-    <div id="actionModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 w-full max-w-xs shadow-2xl">
-            <h3 class="text-center font-bold text-lg mb-6 dark:text-white"><span class="lang-ar">اختر وسيلة التواصل</span><span class="lang-en">Choose Contact Method</span></h3>
-            <div class="space-y-3">
-                <a id="callLink" href="#" class="flex items-center gap-3 w-full bg-blue-600 text-white p-4 rounded-2xl font-bold hover:bg-blue-700"><i class="fa-solid fa-phone"></i> <span class="lang-ar">اتصال</span><span class="lang-en">Call</span></a>
-                <a id="waLink" href="#" target="_blank" class="flex items-center gap-3 w-full bg-green-500 text-white p-4 rounded-2xl font-bold hover:bg-green-600"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-                <button onclick="closeModal()" class="w-full text-gray-400 mt-2 font-bold text-sm">إلغاء</button>
+    <!-- Modals & Scripting (The logic remains the same for consistency) -->
+    <div id="actionModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-[2rem] p-8 w-full max-w-sm shadow-2xl">
+            <h3 class="text-center font-bold text-xl mb-6">اتصل بنا / Contact Us</h3>
+            <div class="space-y-4">
+                <a id="callLink" href="#" class="flex items-center gap-4 w-full bg-blue-600 text-white p-4 rounded-2xl font-bold hover:bg-blue-700"><i class="fa-solid fa-phone"></i> اتصال</a>
+                <a id="waLink" href="#" target="_blank" class="flex items-center gap-4 w-full bg-green-500 text-white p-4 rounded-2xl font-bold hover:bg-green-600"><i class="fa-brands fa-whatsapp"></i> واتساب</a>
+                <button onclick="closeModal()" class="w-full text-gray-400 mt-2 font-bold">إلغاء</button>
             </div>
         </div>
     </div>
-
-    <!-- Toast -->
+    
     <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 translate-y-24 opacity-0 transition-all duration-300 bg-gray-900 text-white px-6 py-3 rounded-full z-50 shadow-2xl font-bold">
-        <span id="toastMsg">تم النسخ!</span>
+        <span id="toastMsg">تم!</span>
     </div>
 
     <script>
