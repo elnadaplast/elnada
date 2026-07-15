@@ -16,122 +16,93 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap');
         .lang-en { display: none; }
-        body { transition: background-color 0.4s ease; background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); }
-        .dark body { background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); }
-        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
-        .dark .glass { background: rgba(45, 55, 72, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); }
+        body { transition: background-color 0.4s ease; background: radial-gradient(circle at top, #e2e8f0 0%, #cbd5e0 100%); }
+        .dark body { background: radial-gradient(circle at top, #1a202c 0%, #0f172a 100%); }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.4); }
+        .dark .glass { background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 255, 255, 0.05); }
     </style>
 </head>
-<body class="min-h-screen p-4 flex justify-center items-start font-sans">
+<body class="min-h-screen p-4 flex justify-center items-center font-sans">
 
     <!-- Card Container -->
-    <div class="glass max-w-md w-full rounded-[2.5rem] shadow-2xl overflow-hidden">
+    <div class="glass max-w-sm w-full rounded-[3rem] shadow-2xl overflow-hidden p-6">
         
         <!-- Header -->
-        <div class="flex justify-between items-center p-6">
-            <button onclick="toggleTheme()" class="w-12 h-12 rounded-2xl bg-white/50 dark:bg-gray-700/50 flex items-center justify-center hover:scale-110 transition shadow-md">
+        <div class="flex justify-between items-center mb-6">
+            <button onclick="toggleTheme()" class="w-12 h-12 rounded-2xl bg-black/5 dark:bg-white/10 flex items-center justify-center hover:scale-110 transition">
                 <i id="theme-icon" class="fa-solid fa-moon dark:text-yellow-400"></i>
             </button>
-            <button onclick="toggleLang()" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-sm font-bold shadow-lg transition hover:scale-105">
+            <button onclick="toggleLang()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-xs font-bold shadow-lg transition">
                 <span id="lang-btn">English</span>
             </button>
         </div>
 
         <!-- Logo & Branding -->
-        <div class="text-center px-6 pb-8">
-            <img src="1000412269_2.jpg" alt="Logo" class="w-32 h-32 mx-auto rounded-3xl shadow-xl mb-6 ring-4 ring-white dark:ring-gray-700">
-            <h1 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-2 tracking-tight">
+        <div class="text-center mb-8">
+            <img src="1000412269_2.jpg" alt="Logo" class="w-28 h-28 mx-auto rounded-3xl shadow-xl ring-4 ring-white dark:ring-slate-700 mb-6">
+            <h1 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-2">
                 <span class="lang-ar">الندى بلاست</span>
                 <span class="lang-en">Al-Nada Plast</span>
             </h1>
-            <p class="text-gray-600 dark:text-gray-300 text-sm font-medium mb-4 leading-relaxed">
-                <span class="lang-ar">الرواد في تجارة وتوزيع مواد التعبئة والتغليف والمطبوعات الورقية</span>
-                <span class="lang-en">Leading experts in trading & distributing packaging materials & stationary solutions.</span>
+            <p class="text-gray-500 dark:text-gray-400 text-sm font-medium">
+                <span class="lang-ar">تغليف | تعبئة | مطبوعات</span>
+                <span class="lang-en">Packaging & Print Solutions</span>
             </p>
-            <div class="inline-flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-4 py-2 rounded-full font-bold">
-                <i class="fa-solid fa-shield-halved"></i>
-                <span class="lang-ar">إرث من الثقة، منذ 1996</span>
-                <span class="lang-en">A legacy of trust, est. 1996</span>
-            </div>
+        </div>
+
+        <!-- NEW: Quick Access Row (Map & Shopping) -->
+        <div class="grid grid-cols-2 gap-3 mb-6">
+            <a href="https://maps.app.goo.gl/azVw1khGMuYoV8xd9" target="_blank" class="flex flex-col items-center justify-center p-4 bg-white dark:bg-gray-700 rounded-2xl shadow-sm hover:shadow-md transition text-gray-700 dark:text-white">
+                <i class="fa-solid fa-map-location-dot text-lg mb-1 text-red-500"></i>
+                <span class="text-[10px] font-bold uppercase"><span class="lang-ar">الموقع</span><span class="lang-en">Location</span></span>
+            </a>
+            <button onclick="showComingSoon()" class="flex flex-col items-center justify-center p-4 bg-white dark:bg-gray-700 rounded-2xl shadow-sm hover:shadow-md transition text-gray-700 dark:text-white">
+                <i class="fa-solid fa-cart-shopping text-lg mb-1 text-green-500"></i>
+                <span class="text-[10px] font-bold uppercase"><span class="lang-ar">التسوق</span><span class="lang-en">Shopping</span></span>
+            </button>
         </div>
 
         <!-- Main Services -->
-        <div class="px-6 space-y-4 pb-6">
-            <!-- Delivery -->
-            <button onclick="openActionModal('01112611103')" class="w-full flex items-center justify-between p-5 rounded-3xl bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg hover:shadow-orange-500/30 transition-all hover:-translate-y-1">
-                <div class="flex items-center gap-4">
-                    <i class="fa-solid fa-truck-fast text-xl bg-white/20 p-3 rounded-xl"></i>
-                    <div class="text-right">
-                        <div class="font-bold text-sm"><span class="lang-ar">الطلب والتوصيل</span><span class="lang-en">Orders & Delivery</span></div>
-                    </div>
-                </div>
-                <div class="font-mono font-bold tracking-wider">01112611103</div>
+        <div class="space-y-3 mb-6">
+            <button onclick="openActionModal('01112611103')" class="w-full flex items-center justify-between p-4 rounded-2xl bg-orange-500 text-white shadow-lg shadow-orange-500/20 active:scale-95 transition">
+                <span class="font-bold text-sm"><span class="lang-ar">الطلب والتوصيل</span><span class="lang-en">Orders & Delivery</span></span>
+                <span class="font-mono font-bold text-sm">01112611103</span>
             </button>
-            
-            <!-- Sales -->
-            <button onclick="openActionModal('01044200047')" class="w-full flex items-center justify-between p-5 rounded-3xl bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg hover:shadow-blue-500/30 transition-all hover:-translate-y-1">
-                <div class="flex items-center gap-4">
-                    <i class="fa-solid fa-handshake text-xl bg-white/20 p-3 rounded-xl"></i>
-                    <div class="text-right">
-                        <div class="font-bold text-sm"><span class="lang-ar">المبيعات والمشتريات</span><span class="lang-en">Sales & Trade Inquiries</span></div>
-                    </div>
-                </div>
-                <div class="font-mono font-bold tracking-wider">01044200047</div>
+            <button onclick="openActionModal('01044200047')" class="w-full flex items-center justify-between p-4 rounded-2xl bg-blue-500 text-white shadow-lg shadow-blue-500/20 active:scale-95 transition">
+                <span class="font-bold text-sm"><span class="lang-ar">المبيعات والمشتريات</span><span class="lang-en">Sales & Trade</span></span>
+                <span class="font-mono font-bold text-sm">01044200047</span>
             </button>
-            
-            <!-- InstaPay -->
-            <a href="https://ipn.eg/C/Q/abdelnaby18/instapay?ISIGN=23052603MEUCIHyaG0WF5uuVOFh89P9/SUVcTD1tDGnywMjqlbrn3mESAiEAs6Nsk1CujAcE/zIKo2QuzeWQco50vBeiKZ14b+3Uk4Q=" target="_blank" class="w-full flex items-center justify-between p-5 rounded-3xl bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg hover:shadow-purple-500/30 transition-all hover:-translate-y-1">
-                <div class="flex items-center gap-4">
-                    <i class="fa-solid fa-wallet text-xl bg-white/20 p-3 rounded-xl"></i>
-                    <div class="font-bold text-sm">InstaPay (انستا باي)</div>
-                </div>
-                <div class="font-mono font-bold tracking-wider">01115949155</div>
+            <a href="https://ipn.eg/C/Q/abdelnaby18/instapay?ISIGN=23052603MEUCIHyaG0WF5uuVOFh89P9/SUVcTD1tDGnywMjqlbrn3mESAiEAs6Nsk1CujAcE/zIKo2QuzeWQco50vBeiKZ14b+3Uk4Q=" target="_blank" class="w-full flex items-center justify-between p-4 rounded-2xl bg-purple-600 text-white shadow-lg shadow-purple-500/20 active:scale-95 transition">
+                <span class="font-bold text-sm">InstaPay (انستا باي)</span>
+                <span class="font-mono font-bold text-sm">01115949155</span>
             </a>
-            
-            <!-- Vodafone Cash -->
-            <button onclick="copyOrCallDirect('01027760090')" class="w-full flex items-center justify-between p-5 rounded-3xl bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg hover:shadow-red-500/30 transition-all hover:-translate-y-1">
-                <div class="flex items-center gap-4">
-                    <i class="fa-solid fa-money-bill-wave text-xl bg-white/20 p-3 rounded-xl"></i>
-                    <div class="font-bold text-sm">Vodafone Cash (فودافون كاش)</div>
-                </div>
-                <div class="font-mono font-bold tracking-wider">01027760090</div>
+            <button onclick="copyOrCallDirect('01027760090')" class="w-full flex items-center justify-between p-4 rounded-2xl bg-red-600 text-white shadow-lg shadow-red-500/20 active:scale-95 transition">
+                <span class="font-bold text-sm">Vodafone Cash</span>
+                <span class="font-mono font-bold text-sm">01027760090</span>
             </button>
         </div>
 
-        <!-- Footer -->
-        <div class="p-6 bg-black/5 dark:bg-white/5 border-t border-black/5 dark:border-white/5 text-center">
-            <h3 class="text-gray-500 dark:text-gray-400 font-bold mb-4 text-xs uppercase tracking-widest">
-                <span class="lang-ar">الشكاوى والمقترحات (للمدير)</span>
-                <span class="lang-en">Feedback & Managerial Support</span>
-            </h3>
-            <button onclick="openActionModal('01027760090')" class="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 py-4 rounded-2xl font-bold hover:bg-gray-50 dark:hover:bg-gray-700 transition flex items-center justify-center gap-3 text-lg shadow-sm">
-                <i class="fa-solid fa-phone-volume text-blue-600"></i> 01027760090
-            </button>
-            <a href="https://maps.app.goo.gl/azVw1khGMuYoV8xd9" target="_blank" class="mt-6 text-gray-400 hover:text-blue-500 transition text-sm flex items-center justify-center gap-2">
-                <i class="fa-solid fa-location-dot"></i> <span class="lang-ar">6 أكتوبر - ميدان الحصري</span><span class="lang-en">6th of October - El Hosary Sq</span>
-            </a>
-        </div>
+        <!-- Manager Support -->
+        <button onclick="openActionModal('01027760090')" class="w-full py-4 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-2xl text-gray-500 font-bold text-sm hover:border-blue-400 hover:text-blue-500 transition">
+            <span class="lang-ar">الشكاوى والمقترحات</span><span class="lang-en">Complaints & Suggestions</span>
+        </button>
     </div>
 
-    <!-- Modal -->
-    <div id="actionModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-[2rem] p-8 w-full max-w-sm shadow-2xl scale-in duration-200">
-            <h3 class="text-center font-bold text-xl mb-8 dark:text-white">تواصل معنا / Contact Us</h3>
-            <div class="space-y-4">
-                <a id="callLink" href="#" class="flex items-center gap-4 w-full bg-blue-600 text-white p-4 rounded-2xl font-bold hover:bg-blue-700 transition">
-                    <i class="fa-solid fa-phone text-xl"></i> <span class="lang-ar">اتصال</span><span class="lang-en">Call</span>
-                </a>
-                <a id="waLink" href="#" target="_blank" class="flex items-center gap-4 w-full bg-green-500 text-white p-4 rounded-2xl font-bold hover:bg-green-600 transition">
-                    <i class="fa-brands fa-whatsapp text-xl"></i> <span class="lang-ar">واتساب</span><span class="lang-en">WhatsApp</span>
-                </a>
-                <button onclick="closeModal()" class="w-full text-gray-400 mt-4 font-bold hover:text-gray-600">إلغاء / Cancel</button>
+    <!-- Modals -->
+    <div id="actionModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 w-full max-w-xs shadow-2xl">
+            <h3 class="text-center font-bold text-lg mb-6 dark:text-white"><span class="lang-ar">اختر وسيلة التواصل</span><span class="lang-en">Choose Contact Method</span></h3>
+            <div class="space-y-3">
+                <a id="callLink" href="#" class="flex items-center gap-3 w-full bg-blue-600 text-white p-4 rounded-2xl font-bold hover:bg-blue-700"><i class="fa-solid fa-phone"></i> <span class="lang-ar">اتصال</span><span class="lang-en">Call</span></a>
+                <a id="waLink" href="#" target="_blank" class="flex items-center gap-3 w-full bg-green-500 text-white p-4 rounded-2xl font-bold hover:bg-green-600"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                <button onclick="closeModal()" class="w-full text-gray-400 mt-2 font-bold text-sm">إلغاء</button>
             </div>
         </div>
     </div>
 
     <!-- Toast -->
-    <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 translate-y-24 opacity-0 transition-all duration-300 bg-gray-900 text-white px-8 py-4 rounded-full z-50 shadow-2xl font-bold">
-        <span class="lang-ar">تم النسخ!</span><span class="lang-en">Copied!</span>
+    <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 translate-y-24 opacity-0 transition-all duration-300 bg-gray-900 text-white px-6 py-3 rounded-full z-50 shadow-2xl font-bold">
+        <span id="toastMsg">تم النسخ!</span>
     </div>
 
     <script>
@@ -155,10 +126,15 @@
             modal.classList.remove('hidden');
         }
         function closeModal() { document.getElementById('actionModal').classList.add('hidden'); }
+        function showComingSoon() {
+            document.getElementById('toastMsg').innerText = document.documentElement.dir === 'rtl' ? 'قريباً...' : 'Coming Soon...';
+            showToast();
+        }
         function copyOrCallDirect(number) {
             if (/Android|iPhone/i.test(navigator.userAgent)) { window.location.href = `tel:${number}`; }
-            else { navigator.clipboard.writeText(number); const t = document.getElementById('toast'); t.classList.remove('translate-y-24', 'opacity-0'); setTimeout(() => t.classList.add('translate-y-24', 'opacity-0'), 2000); }
+            else { navigator.clipboard.writeText(number); document.getElementById('toastMsg').innerText = document.documentElement.dir === 'rtl' ? 'تم النسخ!' : 'Copied!'; showToast(); }
         }
+        function showToast() { const t = document.getElementById('toast'); t.classList.remove('translate-y-24', 'opacity-0'); setTimeout(() => t.classList.add('translate-y-24', 'opacity-0'), 2000); }
     </script>
 </body>
 </html>
