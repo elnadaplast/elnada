@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الندى بلاست | Al-Nada Plast</title>
     
+    <!-- Favicon (شعار الموقع في علامة التبويب) -->
+    <link rel="icon" type="image/jpeg" href="1000412269_2.jpg">
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -46,91 +49,60 @@
                 <span class="lang-ar">للتجارة والتوزيع لمواد التعبئة والتغليف والمطبوعات</span>
                 <span class="lang-en">Trade & Distribution of Packaging Materials & Prints</span>
             </p>
-            <div class="inline-block bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs px-3 py-1 rounded-full font-bold">
-                <span class="lang-ar">إسم له تاريخ - تأسس عام 1996</span>
-                <span class="lang-en">A history-making name - Est. 1996</span>
-            </div>
         </div>
 
-        <!-- Address Section -->
+        <!-- Address -->
         <a href="https://maps.app.goo.gl/azVw1khGMuYoV8xd9" target="_blank" class="block p-4 text-center hover:bg-gray-50 dark:hover:bg-gray-700/50 transition border-b border-gray-100 dark:border-gray-700">
             <i class="fa-solid fa-location-dot text-red-500"></i>
-            <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                <span class="lang-ar">6 أكتوبر - ميدان الحصري - برج (ج)</span>
-                <span class="lang-en">6th of October - El Hosary Sq - Tower C</span>
-            </span>
+            <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">6 أكتوبر - ميدان الحصري - برج (ج)</span>
         </a>
 
-        <!-- Services Grid (Detailed) -->
+        <!-- Services -->
         <div class="p-6 grid grid-cols-1 gap-4">
-            
-            <!-- 1. Orders & Delivery -->
-            <button onclick="copyOrCall('01112611103')" class="flex items-center justify-between bg-orange-500 hover:bg-orange-600 text-white p-5 rounded-2xl shadow-lg transition transform hover:scale-[1.02]">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-truck-fast text-2xl"></i>
-                    <div class="text-right">
-                        <div class="font-bold text-sm"><span class="lang-ar">الطلب والتوصيل</span><span class="lang-en">Orders & Delivery</span></div>
-                    </div>
-                </div>
-                <div class="font-mono text-lg font-bold tracking-wider">01112611103</div>
+            <button onclick="openActionModal('01112611103')" class="flex items-center justify-between bg-orange-500 hover:bg-orange-600 text-white p-5 rounded-2xl shadow-lg transition transform hover:scale-[1.02]">
+                <div class="flex items-center gap-3"><i class="fa-solid fa-truck-fast text-2xl"></i> <span class="font-bold text-sm"><span class="lang-ar">الطلب والتوصيل</span><span class="lang-en">Orders & Delivery</span></span></div>
+                <div class="font-mono text-lg font-bold">01112611103</div>
             </button>
             
-            <!-- 2. Sales & Purchasing -->
-            <button onclick="copyOrCall('01044200047')" class="flex items-center justify-between bg-blue-500 hover:bg-blue-600 text-white p-5 rounded-2xl shadow-lg transition transform hover:scale-[1.02]">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-handshake text-2xl"></i>
-                    <div class="text-right">
-                        <div class="font-bold text-sm"><span class="lang-ar">المبيعات والمشتريات</span><span class="lang-en">Sales & Purchasing</span></div>
-                    </div>
-                </div>
-                <div class="font-mono text-lg font-bold tracking-wider">01044200047</div>
+            <button onclick="openActionModal('01044200047')" class="flex items-center justify-between bg-blue-500 hover:bg-blue-600 text-white p-5 rounded-2xl shadow-lg transition transform hover:scale-[1.02]">
+                <div class="flex items-center gap-3"><i class="fa-solid fa-handshake text-2xl"></i> <span class="font-bold text-sm"><span class="lang-ar">المبيعات والمشتريات</span><span class="lang-en">Sales & Purchasing</span></span></div>
+                <div class="font-mono text-lg font-bold">01044200047</div>
             </button>
             
-            <!-- 3. InstaPay -->
             <a href="https://ipn.eg/C/Q/abdelnaby18/instapay?ISIGN=23052603MEUCIHyaG0WF5uuVOFh89P9/SUVcTD1tDGnywMjqlbrn3mESAiEAs6Nsk1CujAcE/zIKo2QuzeWQco50vBeiKZ14b+3Uk4Q=" target="_blank" class="flex items-center justify-between bg-purple-600 hover:bg-purple-700 text-white p-5 rounded-2xl shadow-lg transition transform hover:scale-[1.02]">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-wallet text-2xl"></i>
-                    <div class="text-right">
-                        <div class="font-bold text-sm">InstaPay (انستا باي)</div>
-                    </div>
-                </div>
-                <div class="font-mono text-lg font-bold tracking-wider">01115949155</div>
+                <div class="flex items-center gap-3"><i class="fa-solid fa-wallet text-2xl"></i> <span class="font-bold text-sm">InstaPay (انستا باي)</span></div>
+                <div class="font-mono text-lg font-bold">01115949155</div>
             </a>
             
-            <!-- 4. Vodafone Cash -->
-            <button onclick="copyOrCall('01027760090')" class="flex items-center justify-between bg-red-600 hover:bg-red-700 text-white p-5 rounded-2xl shadow-lg transition transform hover:scale-[1.02]">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-money-bill-wave text-2xl"></i>
-                    <div class="text-right">
-                        <div class="font-bold text-sm">Vodafone Cash (فودافون كاش)</div>
-                    </div>
-                </div>
-                <div class="font-mono text-lg font-bold tracking-wider">01027760090</div>
+            <button onclick="openActionModal('01027760090')" class="flex items-center justify-between bg-red-600 hover:bg-red-700 text-white p-5 rounded-2xl shadow-lg transition transform hover:scale-[1.02]">
+                <div class="flex items-center gap-3"><i class="fa-solid fa-money-bill-wave text-2xl"></i> <span class="font-bold text-sm">Vodafone Cash (فودافون كاش)</span></div>
+                <div class="font-mono text-lg font-bold">01027760090</div>
             </button>
         </div>
 
-        <!-- Facebook Button -->
-        <div class="px-6 pb-6">
-            <a href="https://www.facebook.com/share/1C1pKGFayp/" target="_blank" class="flex items-center justify-center gap-2 w-full py-3 bg-[#1877F2] hover:bg-[#1565c0] text-white rounded-xl font-bold shadow-md transition">
-                <i class="fa-brands fa-facebook text-xl"></i> <span class="lang-ar">فيسبوك</span><span class="lang-en">Facebook</span>
-            </a>
-        </div>
-
-        <!-- Footer (Complaints Section) -->
+        <!-- Footer Complaints -->
         <div class="bg-gray-100 dark:bg-gray-700/50 p-6 border-t border-gray-200 dark:border-gray-700 text-center">
-            <h3 class="text-gray-600 dark:text-gray-300 font-bold mb-3 text-sm">
-                <span class="lang-ar">الشكاوى والمقترحات (للمدير)</span>
-                <span class="lang-en">Complaints & Suggestions (Manager)</span>
-            </h3>
-            <button onclick="copyOrCall('01027760090')" class="w-full bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 py-3 rounded-xl font-bold hover:border-blue-500 dark:hover:border-blue-400 transition flex items-center justify-center gap-2 text-lg">
+            <h3 class="text-gray-600 dark:text-gray-300 font-bold mb-3 text-sm">الشكاوى والمقترحات (للمدير)</h3>
+            <button onclick="openActionModal('01027760090')" class="w-full bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 py-3 rounded-xl font-bold hover:border-blue-500 transition flex items-center justify-center gap-2 text-lg">
                 <i class="fa-solid fa-phone text-blue-600"></i> 01027760090
             </button>
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 translate-y-24 opacity-0 transition-all duration-300 bg-gray-900 text-white px-6 py-3 rounded-full z-50 shadow-xl">
-        <span class="lang-ar">تم النسخ بنجاح!</span><span class="lang-en">Number copied successfully!</span>
+    <!-- Modal (نافذة الاختيار) -->
+    <div id="actionModal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-3xl p-6 w-full max-w-xs shadow-2xl animate-in fade-in zoom-in duration-200">
+            <h3 class="text-center font-bold text-lg mb-6 dark:text-white">اختر وسيلة التواصل</h3>
+            <div class="space-y-3">
+                <a id="callLink" href="#" class="flex items-center justify-center gap-3 w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700">
+                    <i class="fa-solid fa-phone"></i> اتصال هاتفي
+                </a>
+                <a id="waLink" href="#" target="_blank" class="flex items-center justify-center gap-3 w-full bg-green-500 text-white py-3 rounded-xl font-bold hover:bg-green-600">
+                    <i class="fa-brands fa-whatsapp"></i> واتساب
+                </a>
+                <button onclick="closeModal()" class="w-full text-gray-500 mt-4 font-bold">إلغاء</button>
+            </div>
+        </div>
     </div>
 
     <!-- Script -->
@@ -151,15 +123,19 @@
             icon.classList.toggle('fa-sun');
         }
 
-        function copyOrCall(number) {
-            if (/Android|iPhone/i.test(navigator.userAgent)) {
-                window.location.href = `tel:${number}`;
-            } else {
-                navigator.clipboard.writeText(number);
-                const t = document.getElementById('toast');
-                t.classList.remove('translate-y-24', 'opacity-0');
-                setTimeout(() => t.classList.add('translate-y-24', 'opacity-0'), 2000);
-            }
+        function openActionModal(number) {
+            const modal = document.getElementById('actionModal');
+            const callLink = document.getElementById('callLink');
+            const waLink = document.getElementById('waLink');
+            
+            callLink.href = `tel:${number}`;
+            waLink.href = `https://wa.me/20${number.replace(/^0/, '')}`;
+            
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('actionModal').classList.add('hidden');
         }
     </script>
 </body>
