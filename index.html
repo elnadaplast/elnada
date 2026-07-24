@@ -63,9 +63,10 @@
                     <a href="https://maps.app.goo.gl/azVw1khGMuYoV8xd9" target="_blank" class="px-6 py-3 bg-red-500 text-white rounded-xl font-bold flex items-center gap-2 hover:bg-red-600 transition">
                         <i class="fa-solid fa-location-dot"></i> <span class="lang-ar">موقعنا</span><span class="lang-en">Location</span>
                     </a>
-                    <button onclick="showComingSoon()" class="px-6 py-3 bg-green-600 text-white rounded-xl font-bold flex items-center gap-2 hover:bg-green-700 transition">
+                    <!-- تم التعديل هنا: إضافة الرابط المباشر للمتجر -->
+                    <a href="https://elnadaplast.github.io/store/" target="_blank" class="px-6 py-3 bg-green-600 text-white rounded-xl font-bold flex items-center gap-2 hover:bg-green-700 transition">
                         <i class="fa-solid fa-cart-shopping"></i> <span class="lang-ar">متجرنا الإلكتروني</span><span class="lang-en">Online Shop</span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </section>
@@ -144,7 +145,7 @@
         </footer>
     </main>
 
-    <!-- Modals & Scripting (The logic remains the same for consistency) -->
+    <!-- Modals & Scripting -->
     <div id="actionModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-4">
         <div class="bg-white dark:bg-gray-800 rounded-[2rem] p-8 w-full max-w-sm shadow-2xl">
             <h3 class="text-center font-bold text-xl mb-6">اتصل بنا / Contact Us</h3>
@@ -181,10 +182,6 @@
             modal.classList.remove('hidden');
         }
         function closeModal() { document.getElementById('actionModal').classList.add('hidden'); }
-        function showComingSoon() {
-            document.getElementById('toastMsg').innerText = document.documentElement.dir === 'rtl' ? 'قريباً...' : 'Coming Soon...';
-            showToast();
-        }
         function copyOrCallDirect(number) {
             if (/Android|iPhone/i.test(navigator.userAgent)) { window.location.href = `tel:${number}`; }
             else { navigator.clipboard.writeText(number); document.getElementById('toastMsg').innerText = document.documentElement.dir === 'rtl' ? 'تم النسخ!' : 'Copied!'; showToast(); }
@@ -193,4 +190,3 @@
     </script>
 </body>
 </html>
-
