@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="الندى بلاست - للتجارة والتوزيع وحلول التغليف منذ 1996">
+    <meta name="theme-color" content="#10b981">
+    <title>Al-Nada Plast Shop</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="1000412269_2.jpg">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        if (window.tailwind) {
+            tailwind.config = {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            'ar': ['Cairo', 'sans-serif'],
+                            'en': ['Poppins', 'sans-serif'],
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f4f8 100%);
+            transition: background 0.4s ease, color 0.4s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .dark body {
+            background: linear-gradient(135deg, #0f172a 0%, #111827 50%, #1e293b 100%);
+        }
+        
+        /* Glassmorphism Optimized */
+        .glass {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 20px 0 rgba(31, 38, 135, 0.05);
+        }
+        .dark .glass {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .dark ::-webkit-scrollbar-thumb { background: #475569; }
+        
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Hardware Accelerated Animations */
+        .modal-hidden { opacity: 0; pointer-events: none; visibility: hidden; transition: opacity 0.25s ease, visibility 0.25s ease; }
+        .modal-visible { opacity: 1; pointer-events: auto; visibility: visible; transition: opacity 0.25s ease, visibility 0.25s ease; }
+        
+        .scale-in { animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes scaleIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        
+        .fade-in-up { animation: fadeInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+        @keyframes fadeInUp { from { transform: translateY(15px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .badge-pop { animation: badgePop 0.3s ease; }
+        @keyframes badgePop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+        .category-slider { scrollbar-width: none; -ms-overflow-style: none; cursor: grab; }
+        .category-slider::-webkit-scrollbar { display: none; }
+        /* drag-armed: applied the instant the pointer goes down, purely visual
+           (cursor). dragging: applied only once real movement past the
+           threshold is confirmed — this is what disables pointer-events on
+           the chips. Splitting these two fixes a real bug: a plain tap/click's
+           target is resolved by the browser at pointer-up time, so a chip
+           with pointer-events:none at that instant gets skipped by hit-testing
+           and the click silently does nothing. See initDragScroll(). */
+        .category-slider.drag-armed { cursor: grabbing; }
+        .category-slider.dragging * { pointer-events: none; user-select: none; }
+
+        .search-icon { position: absolute; top: 50%; transform: translateY(-50%); inset-inline-start: 1.2rem; }
+        .search-clear { position: absolute; top: 50%; transform: translateY(-50%); inset-inline-end: 1.2rem; }
+        #searchInput { padding-inline-start: 2.8rem; padding-inline-end: 2.8rem; }
+
+        .cart-drawer-anim { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .modal-hidden .cart-drawer-anim { transform: translateX(100%); }
+        [dir="rtl"] .modal-hidden .cart-drawer-anim { transform: translateX(-100%); }
+        .modal-visible .cart-drawer-anim { transform: translateX(0); }
+    </style>
+</head>
+<body class="font-ar dark:text-gray-100 min-h-screen overflow-x-hidden pb-10">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-40 glass shadow-sm transition-colors duration-300">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between gap-2 sm:gap-4">
+            <button class="flex items-center gap-2 sm:gap-3 cursor-pointer flex-shrink-0 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-xl" onclick="resetFilters()" aria-label="Home">
+                <img src="1000412269_2.jpg" alt="Al-Nada Plast Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl object-cover shadow-md transition-transform duration-300 group-hover:scale-105" onerror="this.src='https://placehold.co/100x100/10b981/ffffff?text=Logo'">
+                <div class="hidden sm:block transition-transform duration-300 text-start">
+                    <h1 class="text-lg font-extrabold text-emerald-600 dark:text-emerald-400 leading-tight" data-i18n="brand_name">الندى بلاست</h1>
+                    <p class="text-xs text-gray-500 dark:text-gray-400" data-i18n="brand_sub">Trading & Distribution</p>
+                </div>
+            </button>
+
+            <!-- Search Bar -->
+            <div id="searchContainer" class="flex-1 max-w-xl relative group hidden">
+                <label for="searchInput" class="sr-only" data-i18n="search_placeholder">Search</label>
+                <input type="text" id="searchInput" oninput="debouncedSearch()" 
+                       class="w-full py-2.5 rounded-full bg-white/80 dark:bg-slate-800/80 border border-gray-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-sm sm:text-base shadow-sm hover:shadow-md"
+                       placeholder="ابحث عن منتج..." data-i18n-ph="search_placeholder">
+                <i class="fas fa-search search-icon text-gray-400 text-sm pointer-events-none group-focus-within:text-emerald-500 transition-colors"></i>
+                <button id="clearSearchBtn" onclick="clearSearch()" class="hidden search-clear text-gray-400 hover:text-red-500 transition-transform transform hover:scale-110 focus-visible:outline-none" aria-label="Clear Search">
+                    <i class="fas fa-times-circle"></i>
+                </button>
+            </div>
+
+            <div class="flex items-center gap-1 sm:gap-3 flex-shrink-0">
+                <button onclick="toggleTheme()" class="p-2.5 rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500" aria-label="Toggle Theme">
+                    <i class="fas fa-moon dark:hidden text-slate-700"></i>
+                    <i class="fas fa-sun hidden dark:inline text-yellow-400"></i>
+                </button>
+                <button onclick="toggleLang()" class="px-3 py-1.5 rounded-full bg-emerald-500 text-white text-sm font-bold hover:bg-emerald-600 transition-transform shadow-sm transform hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500">
+                    <span id="langToggleBtn">EN</span>
+                </button>
+                <button onclick="toggleCart()" id="cartBtnGlobal" class="relative p-2.5 rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors text-lg group hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500" aria-label="Open Cart">
+                    <i id="cartIconAnim" class="fas fa-shopping-cart text-emerald-600 dark:text-emerald-400 transition-transform duration-300 group-hover:scale-110"></i>
+                    <span id="cartBadge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full hidden font-bold shadow-sm transition-transform duration-300">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="flex flex-col items-center justify-center py-32 text-center px-4" aria-live="polite">
+        <div class="w-12 h-12 border-4 border-gray-200 border-t-emerald-500 rounded-full animate-spin mb-4"></div>
+        <p class="text-lg text-gray-500 dark:text-gray-400" data-i18n="loading">جاري تحميل المنتجات...</p>
+    </div>
+
+    <!-- Global Empty State -->
+    <div id="globalEmptyState" class="hidden flex-col items-center justify-center py-32 text-center px-4">
+        <div class="w-24 h-24 mb-6 rounded-full bg-gray-200 dark:bg-slate-800 flex items-center justify-center shadow-inner">
+            <i class="fas fa-box-open text-5xl text-gray-400 dark:text-gray-500"></i>
+        </div>
+        <h2 class="text-3xl font-extrabold mb-4 text-slate-800 dark:text-gray-100" data-i18n="store_empty_title">المتجر قيد التحديث</h2>
+        <p class="text-lg text-gray-500 dark:text-gray-400 max-w-md mx-auto" data-i18n="store_empty_desc">لا توجد منتجات معروضة في المتجر حالياً. نحن نقوم بتحديث الكتالوج الخاص بنا.</p>
+    </div>
+
+    <!-- Main Store Wrapper -->
+    <div id="shopMainWrapper" class="hidden">
+        <!-- Categories Section -->
+        <section class="sticky top-[65px] sm:top-[73px] z-30 glass shadow-sm py-3 mb-6 transition-colors duration-300">
+            <div class="container mx-auto px-2 sm:px-4">
+                <ul id="categoryList" class="category-slider flex gap-2 overflow-x-auto w-full pb-1" role="tablist"></ul>
+            </div>
+        </section>
+
+        <!-- Product Grid -->
+        <main class="container mx-auto px-4 mb-16">
+            <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-5"></div>
+            
+            <!-- Empty State for Search -->
+            <div id="noResults" class="hidden flex-col items-center justify-center py-20 text-center text-gray-500 dark:text-gray-400">
+                <div class="w-20 h-20 mb-6 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+                    <i class="fas fa-search text-4xl text-emerald-500"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-extrabold mb-2 text-slate-700 dark:text-gray-200" data-i18n="no_results_title">لا توجد منتجات مطابقة</h3>
+                <p class="mb-6 px-4" data-i18n="no_results_desc">حاول تعديل البحث أو تصفح الفئات الأخرى</p>
+                <button onclick="resetFilters()" class="px-6 py-3 bg-emerald-500 text-white rounded-xl font-bold hover:bg-emerald-600 transition-transform shadow-lg transform hover:-translate-y-1 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500">
+                    <i class="fas fa-redo ml-2"></i> <span data-i18n="show_all">عرض كل المنتجات</span>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Corporate Footer -->
+    <footer class="container mx-auto px-4 mt-8 mb-4">
+        <div class="glass rounded-3xl p-6 sm:p-10 shadow-lg border border-gray-100 dark:border-gray-800">
+            <div class="max-w-2xl mx-auto text-center flex flex-col items-center justify-center">
+                <h3 class="text-2xl font-extrabold mb-4 text-emerald-600 dark:text-emerald-400" data-i18n="footer_about_title">الندى بلاست</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-6" data-i18n="footer_about_desc">
+                    نحن متخصصون في توفير أفضل حلول مواد التعبئة والتغليف والمطبوعات الورقية عالية الجودة منذ عام 1996. التزامنا هو تقديم خدمة متميزة لعملائنا في كافة أنحاء الجمهورية.
+                </p>
+                <div class="flex items-center justify-center gap-4">
+                    <a href="https://www.facebook.com/share/1C1pKGFayp/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="Facebook">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="https://maps.app.goo.gl/azVw1khGMuYoV8xd9" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center hover:bg-red-600 hover:text-white transition-colors focus-visible:ring-2 focus-visible:ring-red-500" aria-label="Location">
+                        <i class="fas fa-map-marker-alt text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 text-center text-xs text-gray-400 font-bold" dir="ltr">
+                &copy; 2024 Al-Nada Plast. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Quick View Modal -->
+    <div id="productModal" class="modal-hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onclick="closeModal('productModal', event)" role="dialog" aria-modal="true" aria-labelledby="modalName">
+        <div class="glass bg-white/95 dark:bg-slate-800/95 rounded-3xl w-full max-w-md flex flex-col shadow-2xl scale-in overflow-hidden relative" onclick="event.stopPropagation()">
+            
+            <div class="absolute top-3 left-3 right-3 flex justify-between z-10 pointer-events-none">
+                <button onclick="shareProduct()" class="w-8 h-8 rounded-full bg-white/80 dark:bg-slate-700/80 backdrop-blur shadow flex items-center justify-center text-slate-700 dark:text-gray-200 pointer-events-auto hover:scale-110 transition-transform focus-visible:ring-2 focus-visible:ring-emerald-500" aria-label="Share">
+                    <i class="fas fa-share-nodes"></i>
+                </button>
+                <button onclick="closeModal('productModal')" class="w-8 h-8 rounded-full bg-white/80 dark:bg-slate-700/80 backdrop-blur shadow flex items-center justify-center text-gray-500 hover:text-red-500 pointer-events-auto hover:scale-110 transition-transform focus-visible:ring-2 focus-visible:ring-red-500" aria-label="Close Modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="overflow-y-auto hide-scrollbar p-5 pt-4 max-h-[75vh]">
+                <div class="w-full h-48 sm:h-56 bg-gray-50 dark:bg-slate-900/50 rounded-2xl mb-4 mt-6 relative flex items-center justify-center">
+                    <img id="modalImg" src="" alt="Product" loading="lazy" decoding="async" class="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal p-2">
+                </div>
+                
+                <div id="modalCategories" class="flex flex-wrap gap-1.5 mb-2"></div>
+                <h2 id="modalName" class="text-lg sm:text-xl font-extrabold mb-4 text-slate-800 dark:text-gray-100 leading-tight"></h2>
+                
+                <div class="mb-5">
+                    <label class="block mb-2 font-bold text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400" data-i18n="select_unit">اختر الوحدة:</label>
+                    <div id="modalUnits" class="space-y-2"></div>
+                </div>
+
+                <div class="mb-2 flex items-center justify-between gap-4">
+                    <label class="font-bold text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400" data-i18n="quantity">الكمية:</label>
+                    <div class="flex items-center gap-2 bg-gray-100 dark:bg-slate-700 rounded-xl p-1 shadow-inner">
+                        <button onclick="changeModalQty(-1)" class="w-10 h-10 rounded-lg bg-white dark:bg-slate-800 text-lg font-bold hover:bg-emerald-500 hover:text-white transition-colors shadow-sm flex items-center justify-center focus-visible:outline-none" aria-label="Decrease Quantity">-</button>
+                        <input type="number" id="modalQty" value="1" min="1" class="w-12 text-center text-lg font-bold bg-transparent border-none outline-none text-slate-800 dark:text-white" aria-label="Quantity Input">
+                        <button onclick="changeModalQty(1)" class="w-10 h-10 rounded-lg bg-white dark:bg-slate-800 text-lg font-bold hover:bg-emerald-500 hover:text-white transition-colors shadow-sm flex items-center justify-center focus-visible:outline-none" aria-label="Increase Quantity">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 border-t border-gray-100 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 backdrop-blur-md">
+                <button id="addToCartBtn" onclick="addToCartFromModal()" class="w-full py-3.5 bg-emerald-500 text-white rounded-2xl font-bold text-lg hover:bg-emerald-600 transition-all shadow-lg hover:shadow-emerald-500/40 flex items-center justify-center gap-3 transform active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500">
+                    <i class="fas fa-cart-plus text-xl"></i>
+                    <span id="addToCartText" data-i18n="add_to_cart">أضف إلى السلة</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div id="cartDrawer" class="modal-hidden fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm" onclick="closeModal('cartDrawer', event)" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+        <div class="cart-drawer-anim glass w-full max-w-md h-full p-5 sm:p-6 flex flex-col shadow-2xl" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-200 dark:border-slate-700">
+                <h2 id="cartTitle" class="text-xl font-extrabold flex items-center gap-3">
+                    <i class="fas fa-shopping-cart text-emerald-500 text-lg"></i> 
+                    <span data-i18n="cart">السلة</span>
+                    <span id="cartCount" class="text-sm font-normal text-gray-500 bg-gray-100 dark:bg-slate-800 px-2 py-1 rounded-lg"></span>
+                </h2>
+                <button onclick="closeModal('cartDrawer')" class="text-2xl text-gray-500 hover:text-red-500 transition-transform hover:rotate-90 hover:scale-110 focus-visible:outline-none" aria-label="Close Cart">
+                    <i class="fas fa-times-circle"></i>
+                </button>
+            </div>
+
+            <div id="cartItemsContainer" class="flex-1 overflow-y-auto pr-2 pb-2">
+                <div id="cartItems" class="space-y-3"></div>
+                <div id="emptyCart" class="hidden flex-col items-center justify-center h-full text-center text-gray-500 dark:text-gray-400 py-10">
+                    <div class="w-20 h-20 mb-6 rounded-full bg-red-100 dark:bg-red-900/20 flex items-center justify-center">
+                        <i class="fas fa-shopping-basket text-4xl text-red-400"></i>
+                    </div>
+                    <h3 class="text-xl font-extrabold mb-2 text-slate-700 dark:text-gray-200" data-i18n="empty_cart_title">سلتك فارغة</h3>
+                    <button onclick="closeModal('cartDrawer')" class="px-6 py-3 bg-emerald-500 text-white rounded-xl font-bold hover:bg-emerald-600 transition-transform shadow-lg transform hover:-translate-y-1 active:scale-95 text-sm mt-4 focus-visible:outline-none">
+                        <span data-i18n="start_shopping">ابدأ التسوق</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="cartSummary" class="pt-4 border-t border-gray-200 dark:border-slate-700 mt-4 hidden">
+                <button onclick="openCheckoutModal()" class="w-full py-4 bg-emerald-500 text-white rounded-2xl font-bold text-lg hover:bg-emerald-600 transition-all shadow-lg hover:shadow-emerald-500/40 flex items-center justify-center gap-3 transform active:scale-95 focus-visible:outline-none">
+                    <i class="fas fa-check-circle text-xl"></i>
+                    <span data-i18n="checkout">إتمام الشراء</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Method Modal -->
+    <div id="checkoutModal" class="modal-hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm" onclick="closeModal('checkoutModal', event)" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+        <div class="glass rounded-3xl p-6 sm:p-8 w-full max-w-sm scale-in shadow-2xl relative" onclick="event.stopPropagation()">
+            <button onclick="closeModal('checkoutModal')" class="absolute top-4 rtl:left-4 ltr:right-4 text-2xl text-gray-500 hover:text-red-500 z-10 transition-transform hover:scale-110 hover:rotate-90 focus-visible:outline-none" aria-label="Close Checkout">
+                <i class="fas fa-times-circle"></i>
+            </button>
+            <h2 id="checkoutTitle" class="text-xl font-extrabold mb-6 text-center text-slate-800 dark:text-gray-100 mt-2" data-i18n="delivery_method">طريقة الاستلام</h2>
+            <div class="space-y-4 mb-6">
+                <label class="flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-200 dark:border-slate-700 cursor-pointer hover:border-emerald-500 transition-all has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-500/10 has-[:checked]:shadow-md transform hover:-translate-y-1">
+                    <input type="radio" name="deliveryMethod" value="pickup" checked class="w-5 h-5 accent-emerald-500 focus-visible:ring-2">
+                    <div class="flex-1">
+                        <h3 class="font-bold text-lg text-slate-800 dark:text-gray-100" data-i18n="pickup">الاستلام من المحل</h3>
+                    </div>
+                </label>
+                <label class="flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-200 dark:border-slate-700 cursor-pointer hover:border-emerald-500 transition-all has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-500/10 has-[:checked]:shadow-md transform hover:-translate-y-1">
+                    <input type="radio" name="deliveryMethod" value="delivery" class="w-5 h-5 accent-emerald-500 focus-visible:ring-2">
+                    <div class="flex-1">
+                        <h3 class="font-bold text-lg text-slate-800 dark:text-gray-100" data-i18n="home_delivery">توصيل للمنزل</h3>
+                    </div>
+                </label>
+            </div>
+            <button onclick="sendWhatsAppOrder()" class="w-full py-3.5 bg-green-500 text-white rounded-2xl font-bold text-lg hover:bg-green-600 transition-all shadow-lg hover:shadow-green-500/30 flex items-center justify-center gap-3 transform active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-500">
+                <i class="fab fa-whatsapp text-2xl"></i>
+                <span data-i18n="send_order">إرسال الطلب</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] bg-slate-800 dark:bg-white text-white dark:text-slate-800 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl shadow-2xl flex items-center gap-3 transition-all duration-300 opacity-0 translate-y-10 pointer-events-none font-bold text-sm sm:text-base border border-gray-700 dark:border-gray-200" role="alert">
+        <i class="fas fa-check-circle text-emerald-400 dark:text-emerald-500 text-lg"></i>
+        <span id="toastMsg"></span>
+    </div>
+
+<script>
+    // ==========================================
+    // 1. HELPERS & UTILITIES
+    // ==========================================
+    const $ = id => document.getElementById(id);
+    const triggerVibration = (ms) => navigator.vibrate?.(ms);
+
+    // Safe LocalStorage Handlers
+    const storage = {
+        get: (key, fallback = null) => { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } },
+        set: (key, val) => { try { localStorage.setItem(key, typeof val === 'string' ? val : JSON.stringify(val)); } catch (e) { console.warn('LS Error', e); } },
+        getString: (key, fallback = '') => { try { return localStorage.getItem(key) ?? fallback; } catch { return fallback; } },
+        setString: (key, val) => { try { localStorage.setItem(key, val); } catch (e) {} }
+    };
+
+    // Image Proxy Generator — routes every product photo through wsrv.nl, a
+    // free, unauthenticated, open-source resize/cache proxy (backed by
+    // Cloudflare's CDN). It fetches the original once, downsamples it to
+    // the exact pixel size requested, re-encodes as WebP, and caches that
+    // result for every later visitor — so a multi-MB source photo never
+    // has to be downloaded in full just to show an 80px cart thumbnail.
+    const getOptimizedImage = (rawUrl, width = 400) => `https://wsrv.nl/?url=${encodeURIComponent(rawUrl)}&w=${width}&output=webp&q=80&we=1`;
+    const IMG_W = { grid: 400, cart: 160, modal: 800 };
+
+    // ==========================================
+    // 2. STATE & CONFIGURATION
+    // ==========================================
+    let products = [];
+    let cart = storage.get('alnada_cart', []);
+    
+    let activeCategory = 'all';
+    let activeSearchQuery = '';
+    let searchDebounceTimer = null;
+    
+    let currentLang = storage.getString('alnada_lang', 'ar');
+    let currentTheme = storage.getString('alnada_theme', 'light');
+    
+    let currentProduct = null;
+    let selectedUnit = null;
+    let modalHistory = [];
+
+    // ==========================================
+    // 3. NLP / SYNONYM MAPPING
+    // ==========================================
+    const synonymMap = {
+        "بلاستك": "بلاستيك", "بلاستكيات": "بلاستيك", "plastik": "بلاستيك", "plastic": "بلاستيك",
+        "منديل": "مناديل", "منادل": "مناديل", "tissue": "مناديل", "tissues": "مناديل",
+        "اكواب": "أكواب", "cup": "أكواب", "cups": "أكواب",
+        "اكياس": "أكياس", "bag": "أكياس", "bags": "أكياس",
+        "علب": "علب", "box": "علب", "boxes": "علب"
+    };
+
+    const normalizeCategory = (cat) => {
+        if (!cat) return "";
+        const lowerCat = cat.toLowerCase();
+        return synonymMap[cat] ?? synonymMap[lowerCat] ?? cat;
+    };
+
+    // ==========================================
+    // 4. SMART REGEX FILENAME PARSER
+    // ==========================================
+    const parseFilename = (filename) => {
+        const cleanName = filename.replace(/\.(jpg|jpeg|png|webp|gif|svg|bmp|ico|tiff|tif|avif|jfif|pjpeg|pjp)$/i, "").trim();
+        const catMatches = cleanName.match(/#[^#@]+/g) || [];
+        const rawCategories = catMatches.map(c => normalizeCategory(c.substring(1).trim())).filter(c => c.length > 0);
+        
+        const unitMatches = cleanName.match(/@[^#@]+/g) || [];
+        const units = unitMatches.map(u => {
+            let unitStr = u.substring(1).trim();
+            let unitName = unitStr;
+            let qty = 1;
+            
+            if (unitStr.includes('=')) {
+                const parts = unitStr.split('=');
+                unitName = parts[0].trim();
+                const numMatch = parts[1].match(/(\d+)/);
+                if (numMatch) qty = parseInt(numMatch[1]) || 1;
+            } else if (unitStr.includes('(')) {
+                const parts = unitStr.split('(');
+                unitName = parts[0].trim();
+                const numMatch = parts[1].match(/(\d+)/);
+                if (numMatch) qty = parseInt(numMatch[1]) || 1;
+            } else {
+                unitName = unitStr;
+            }
+            return { name: unitName.replace(/[()]/g, '').trim() || 'قطعة', qty: Math.max(1, qty) };
+        });
+        
+        const name = cleanName.replace(/#[^#@]+/g, '').replace(/@[^#@]+/g, '').replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').replace(/^[-\s]+|[-\s]+$/g, '').trim();
+        return {
+            id: filename,
+            name: name || "منتج",
+            categories: [...new Set(rawCategories)],
+            units: units.length > 0 ? units : [{ name: 'قطعة', qty: 1 }]
+        };
+    };
+
+    // ==========================================
+    // 5. SMART CACHING & GITHUB API
+    // ==========================================
+    const setDisplay = (id, show, flex = false) => {
+        const el = $(id);
+        if (!el) return;
+        if (show) { el.classList.remove('hidden'); el.classList.add(flex ? 'flex' : 'block'); }
+        else { el.classList.add('hidden'); el.classList.remove('flex', 'block'); }
+    };
+
+    async function fetchProducts() {
+        setDisplay('loadingState', true, true);
+        
+        try {
+            const cachedData = storage.get('alnada_products_cache');
+            const cacheTime = storage.getString('alnada_products_time');
+            
+            // 30 Minutes Expiry
+            if (cachedData && cacheTime && (Date.now() - parseInt(cacheTime) < 1800000)) {
+                products = cachedData;
+                if (products.length > 0) {
+                    setDisplay('loadingState', false);
+                    updateUI();
+                    return; 
+                }
+            }
+        } catch (e) { console.warn('Cache read error', e); }
+
+        try {
+            const host = window.location.hostname;
+            const owner = host.includes('github.io') ? host.split('.')[0] : 'mahmoudelsheikh7';
+
+            const reposResponse = await fetch(`https://api.github.com/users/${owner}/repos?per_page=100`);
+            if (!reposResponse.ok) throw new Error("API Error");
+            
+            const repos = await reposResponse.json();
+            const validExtensions = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'];
+            const ignoredFiles = ['1000412269_2.jpg', '1000412269.jpg', '1000412270.jpg', '1000412270_2.jpg', 'favicon.ico', '1784906934836.jpeg'];
+            let allImageFiles = [];
+
+            await Promise.allSettled(repos.map(async (repo) => {
+                const branch = repo.default_branch || 'main';
+                const treeResponse = await fetch(`https://api.github.com/repos/${owner}/${repo.name}/git/trees/${branch}?recursive=1`);
+                if (treeResponse.ok) {
+                    const treeData = await treeResponse.json();
+                    if (treeData?.tree) {
+                        const images = treeData.tree.filter(file => {
+                            if (file.type !== 'blob') return false;
+                            const filename = file.path.split('/').pop();
+                            const ext = filename.split('.').pop().toLowerCase();
+                            return validExtensions.includes(ext) && !ignoredFiles.includes(filename);
+                        }).map(file => {
+                            const filename = file.path.split('/').pop();
+                            const encodedPath = file.path.split('/').map(encodeURIComponent).join('/');
+                            return {
+                                name: filename,
+                                download_url: `https://raw.githubusercontent.com/${owner}/${repo.name}/${branch}/${encodedPath}`
+                            };
+                        });
+                        allImageFiles = allImageFiles.concat(images);
+                    }
+                }
+            }));
+
+            if (allImageFiles.length > 0) {
+                products = allImageFiles.map(file => {
+                    const parsed = parseFilename(file.name);
+                    parsed.originalImg = file.download_url; // Keep Raw
+                    parsed.img = getOptimizedImage(file.download_url, IMG_W.grid); // Proxied grid thumbnail
+                    return parsed;
+                });
+                storage.set('alnada_products_cache', products);
+                storage.setString('alnada_products_time', Date.now().toString());
+            }
+
+            setDisplay('loadingState', false);
+            updateUI();
+        } catch (error) {
+            console.error("Fetch Error:", error);
+            setDisplay('loadingState', false);
+            if (products.length === 0) {
+                setDisplay('globalEmptyState', true, true);
+                setDisplay('searchContainer', false);
+                setDisplay('cartBtnGlobal', false);
+            }
+        }
+    }
+
+    // ==========================================
+    // 6. SMART FUZZY SEARCH (Levenshtein)
+    // ==========================================
+    const levenshtein = (a, b) => {
+        if(a.length === 0) return b.length;
+        if(b.length === 0) return a.length;
+        const matrix = Array(b.length + 1).fill(null).map(() => Array(a.length + 1).fill(null));
+        for (let i = 0; i <= b.length; i++) matrix[i][0] = i;
+        for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+        for (let i = 1; i <= b.length; i++) {
+            for (let j = 1; j <= a.length; j++) {
+                if (b.charAt(i - 1) === a.charAt(j - 1)) matrix[i][j] = matrix[i - 1][j - 1];
+                else matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1);
+            }
+        }
+        return matrix[b.length][a.length];
+    };
+
+    const fuzzySearch = (query, target) => {
+        query = query.toLowerCase().trim();
+        target = target.toLowerCase().trim();
+        if (target.includes(query)) return true;
+        const targetWords = target.split(' ');
+        for (const word of targetWords) {
+            const dist = levenshtein(query, word);
+            if ((word.length > 3 && dist <= 2) || (word.length <= 3 && dist <= 1)) return true;
+        }
+        return false;
+    };
+
+    // ==========================================
+    // 7. i18n & THEMING
+    // ==========================================
+    const i18n = {
+        ar: {
+            brand_name: "الندى بلاست", brand_sub: "للتجارة والتوزيع", search_placeholder: "ابحث عن منتج...",
+            all: "الكل", no_results_title: "لا توجد منتجات مطابقة", no_results_desc: "حاول تعديل البحث أو تصفح الفئات الأخرى",
+            show_all: "عرض كل المنتجات", select_unit: "اختر الوحدة:", quantity: "الكمية:", add_to_cart: "أضف إلى السلة", added_success: "تمت الإضافة بنجاح ✓",
+            cart: "السلة", checkout: "إتمام الشراء", empty_cart_title: "سلتك فارغة", empty_cart_desc: "أضف بعض المنتجات لإتمام الطلب",
+            start_shopping: "ابدأ التسوق", delivery_method: "طريقة الاستلام", pickup: "الاستلام من المحل",
+            home_delivery: "توصيل للمنزل", send_order: "إرسال الطلب", link_copied: "تم نسخ الرابط",
+            piece: "قطعة", empty_cart_warn: "السلة فارغة! أضف منتجات أولاً.", items_in_cart: "عنصر",
+            footer_about_title: "الندى بلاست", footer_about_desc: "نحن متخصصون في توفير أفضل حلول مواد التعبئة والتغليف والمطبوعات الورقية عالية الجودة منذ عام 1996.",
+            store_empty_title: "المتجر قيد التحديث", store_empty_desc: "لا توجد منتجات معروضة في المتجر حالياً.",
+            loading: "جاري تحميل المنتجات..."
+        },
+        en: {
+            brand_name: "Al-Nada Plast", brand_sub: "Trading & Distribution", search_placeholder: "Search for product...",
+            all: "All", no_results_title: "No matching products", no_results_desc: "Try adjusting your search or browse other categories",
+            show_all: "Show All Products", select_unit: "Select Unit:", quantity: "Quantity:", add_to_cart: "Add to Cart", added_success: "Added Successfully ✓",
+            cart: "Cart", checkout: "Checkout", empty_cart_title: "Your cart is empty", empty_cart_desc: "Add some products to complete your order",
+            start_shopping: "Start Shopping", delivery_method: "Delivery Method", pickup: "Store Pickup",
+            home_delivery: "Home Delivery", send_order: "Send Order", link_copied: "Link Copied",
+            piece: "Piece", empty_cart_warn: "Cart is empty! Add products first.", items_in_cart: "items",
+            footer_about_title: "Al-Nada Plast", footer_about_desc: "We specialize in providing high-quality packaging solutions and paper prints since 1996.",
+            store_empty_title: "Store is Updating", store_empty_desc: "There are currently no products available online.",
+            loading: "Loading products..."
+        }
+    };
+
+    const t = (key) => i18n[currentLang]?.[key] ?? key;
+
+    function updateUI() {
+        document.documentElement.lang = currentLang;
+        document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.classList.toggle('dark', currentTheme === 'dark');
+        document.body.className = `min-h-screen overflow-x-hidden pb-10 ${currentLang === 'ar' ? 'font-ar' : 'font-en'} dark:text-gray-100`;
+        
+        document.querySelectorAll('[data-i18n]').forEach(el => el.innerText = t(el.getAttribute('data-i18n')));
+        document.querySelectorAll('[data-i18n-ph]').forEach(el => el.placeholder = t(el.getAttribute('data-i18n-ph')));
+        
+        $('langToggleBtn').innerText = currentLang === 'ar' ? 'EN' : 'ع';
+        
+        renderCart();
+
+        if (products.length > 0) {
+            setDisplay('globalEmptyState', false);
+            setDisplay('shopMainWrapper', true);
+            setDisplay('searchContainer', true);
+            setDisplay('cartBtnGlobal', true);
+            renderCategories();
+            renderProducts();
+        } else if ($('loadingState').classList.contains('hidden')) {
+            setDisplay('globalEmptyState', true, true);
+        }
+    }
+
+    function toggleLang() {
+        currentLang = currentLang === 'ar' ? 'en' : 'ar';
+        storage.setString('alnada_lang', currentLang);
+        updateUI();
+    }
+
+    function toggleTheme() {
+        currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+        storage.setString('alnada_theme', currentTheme);
+        document.documentElement.classList.toggle('dark', currentTheme === 'dark');
+    }
+
+    // ==========================================
+    // 8. UI RENDERING
+    // ==========================================
+    function renderCategories() {
+        const allCats = new Set();
+        products.forEach(p => p.categories.forEach(c => allCats.add(c)));
+        
+        let html = `<li role="tab" aria-selected="${activeCategory === 'all'}" class="flex-shrink-0 cursor-pointer px-5 py-2 rounded-full font-bold transition-all duration-300 flex items-center gap-2 whitespace-nowrap text-sm select-none ${activeCategory === 'all' ? 'bg-emerald-500 text-white shadow-md transform scale-105' : 'bg-white/70 dark:bg-slate-800/70 text-slate-700 dark:text-gray-200 hover:bg-emerald-500/10 hover:text-emerald-600'}" onclick="filterByCategory('all')">
+                        <i class="fas fa-border-all text-xs"></i> <span>${t('all')}</span>
+                    </li>`;
+
+        [...allCats].sort().forEach(cat => {
+            html += `<li role="tab" aria-selected="${activeCategory === cat}" class="flex-shrink-0 cursor-pointer px-5 py-2 rounded-full font-bold transition-all duration-300 flex items-center gap-2 whitespace-nowrap text-sm select-none ${activeCategory === cat ? 'bg-emerald-500 text-white shadow-md transform scale-105' : 'bg-white/70 dark:bg-slate-800/70 text-slate-700 dark:text-gray-200 hover:bg-emerald-500/10 hover:text-emerald-600'}" onclick="filterByCategory('${cat}')">
+                        <i class="fas fa-tag text-xs"></i> ${cat}
+                    </li>`;
+        });
+        
+        $('categoryList').innerHTML = html;
+    }
+
+    function renderProducts() {
+        const clearBtn = $('clearSearchBtn');
+        clearBtn.classList.toggle('hidden', !activeSearchQuery);
+        
+        let filtered = products;
+        if (activeCategory !== 'all') filtered = filtered.filter(p => p.categories.includes(activeCategory));
+        if (activeSearchQuery) {
+            filtered = filtered.filter(p => fuzzySearch(activeSearchQuery, p.name) || p.categories.some(c => fuzzySearch(activeSearchQuery, c)));
+        }
+
+        if (filtered.length === 0) {
+            $('productGrid').innerHTML = '';
+            setDisplay('noResults', true, true);
+            return;
+        }
+        
+        setDisplay('noResults', false);
+        $('productGrid').innerHTML = filtered.map((p, i) => `
+            <button class="fade-in-up text-start glass rounded-2xl sm:rounded-3xl p-2 sm:p-3 shadow-sm hover:shadow-xl transition-transform duration-300 hover:-translate-y-1 cursor-pointer group flex flex-col h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500" style="animation-delay: ${i * 0.03}s" onclick="openProductModal('${p.id}')" aria-label="View ${p.name}">
+                <div class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl overflow-hidden mb-2 sm:mb-3 aspect-square w-full flex items-center justify-center p-2 sm:p-3 relative">
+                    <img src="${p.img}" alt="${p.name}" loading="lazy" decoding="async" class="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/300x300/e2e8f0/64748b?text=Image'">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-xl sm:rounded-2xl backdrop-blur-[2px]">
+                        <span class="bg-emerald-500 text-white w-10 h-10 rounded-full flex items-center justify-center transform scale-75 group-hover:scale-100 transition-transform duration-300 shadow-lg"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <h3 class="font-bold text-xs sm:text-base text-center text-slate-800 dark:text-gray-100 line-clamp-2 px-1 flex-1 leading-snug w-full">${p.name}</h3>
+            </button>
+        `).join('');
+    }
+
+    function renderCart() {
+        const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+
+        if (cart.length === 0) {
+            setDisplay('emptyCart', true, true);
+            $('cartItems').innerHTML = '';
+            setDisplay('cartSummary', false);
+            setDisplay('cartBadge', false);
+            $('cartCount').innerText = '';
+        } else {
+            setDisplay('emptyCart', false);
+            setDisplay('cartSummary', true);
+            setDisplay('cartBadge', true);
+            $('cartBadge').innerText = totalQty;
+            $('cartCount').innerText = `(${cart.length} ${t('items_in_cart')})`;
+
+            $('cartItems').innerHTML = cart.map((item, index) => `
+                <div class="flex gap-3 bg-white/80 dark:bg-slate-800/80 p-3 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 fade-in-up hover:shadow-md transition-shadow">
+                    <img src="${item.img}" alt="${item.name}" loading="lazy" decoding="async" class="w-16 h-16 sm:w-20 sm:h-20 object-contain mix-blend-multiply dark:mix-blend-normal rounded-xl bg-white dark:bg-slate-700 p-1 flex-shrink-0" onerror="this.src='https://placehold.co/100x100/e2e8f0/64748b?text=Img'">
+                    <div class="flex-1 min-w-0 flex flex-col justify-center">
+                        <h4 class="font-bold text-sm sm:text-base truncate text-slate-800 dark:text-gray-100">${item.name}</h4>
+                        <p class="text-xs text-emerald-600 dark:text-emerald-400 mb-2 font-semibold flex items-center gap-1">
+                            <i class="fas fa-box"></i> ${item.unit.name}
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-1 bg-gray-100 dark:bg-slate-700 rounded-lg p-1 shadow-inner">
+                                <button onclick="changeCartQty(${index}, -1)" class="w-7 h-7 rounded-md bg-white dark:bg-slate-800 text-sm font-bold hover:bg-emerald-500 hover:text-white transition-colors flex items-center justify-center shadow-sm" aria-label="Decrease Quantity">-</button>
+                                <span class="font-bold text-sm w-8 text-center select-none">${item.qty}</span>
+                                <button onclick="changeCartQty(${index}, 1)" class="w-7 h-7 rounded-md bg-white dark:bg-slate-800 text-sm font-bold hover:bg-emerald-500 hover:text-white transition-colors flex items-center justify-center shadow-sm" aria-label="Increase Quantity">+</button>
+                            </div>
+                            <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 w-8 h-8 rounded-full flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500" aria-label="Remove Item">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    }
+
+    // ==========================================
+    // 9. MODAL & HISTORY API
+    // A single history "slot" is pushed the first time any modal opens, so
+    // the hardware/browser Back button closes it instead of leaving the
+    // page. Every later open/close/switch (X button, backdrop, Escape,
+    // switching cart -> checkout, etc.) just relabels that same slot with
+    // history.replaceState — synchronous, fires no popstate, so it can
+    // never race with whatever happens next (the previous version called
+    // history.back() on every programmatic close, which is asynchronous
+    // and could race with a fast subsequent openModal()). The slot is only
+    // ever actually consumed by a real physical Back press.
+    // ==========================================
+    let historySlotUsed = false;
+    let isPopStateClose = false;
+
+    function syncModalHistoryState() {
+        const hasOpenModal = modalHistory.length > 0;
+        try {
+            if (hasOpenModal && !historySlotUsed) {
+                window.history.pushState({ modalOpen: true }, '');
+                historySlotUsed = true;
+            } else if (historySlotUsed && !isPopStateClose) {
+                window.history.replaceState({ modalOpen: hasOpenModal }, '');
+            }
+        } catch (e) { /* Some sandboxed preview contexts restrict history APIs; modals still open/close normally either way. */ }
+    }
+
+    function openModal(id) {
+        const modal = $(id);
+        modal.classList.remove('modal-hidden');
+        modal.classList.add('modal-visible');
+        document.body.style.overflow = 'hidden';
+        modalHistory.push(id);
+        syncModalHistoryState();
+    }
+
+    function hideModal(id) {
+        const modal = $(id);
+        modal.classList.remove('modal-visible');
+        modal.classList.add('modal-hidden');
+        const index = modalHistory.indexOf(id);
+        if (index > -1) modalHistory.splice(index, 1);
+        if (modalHistory.length === 0) document.body.style.overflow = '';
+        syncModalHistoryState();
+    }
+
+    function closeModal(id, e = null) {
+        if (e && e.target !== e.currentTarget) return;
+        hideModal(id);
+    }
+
+    window.addEventListener('popstate', () => {
+        if (modalHistory.length === 0) return;
+        isPopStateClose = true;
+        historySlotUsed = false;
+        hideModal(modalHistory[modalHistory.length - 1]);
+        isPopStateClose = false;
+    });
+
+    // ==========================================
+    // 10. APP LOGIC & EVENTS
+    // ==========================================
+    function debouncedSearch() {
+        clearTimeout(searchDebounceTimer);
+        searchDebounceTimer = setTimeout(() => {
+            activeSearchQuery = $('searchInput').value;
+            renderProducts();
+        }, 200);
+    }
+
+    function clearSearch() {
+        $('searchInput').value = '';
+        activeSearchQuery = '';
+        renderProducts();
+        $('searchInput').focus();
+    }
+
+    function resetFilters() {
+        clearSearch();
+        activeCategory = 'all';
+        if (products.length > 0) {
+            renderCategories();
+            renderProducts();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    function filterByCategory(cat) {
+        activeCategory = cat;
+        renderCategories();
+        renderProducts();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openProductModal(id) {
+        currentProduct = products.find(p => p.id === id);
+        if (!currentProduct) return;
+
+        $('modalImg').src = getOptimizedImage(currentProduct.originalImg, IMG_W.modal);
+        $('modalName').innerText = currentProduct.name;
+        $('modalCategories').innerHTML = currentProduct.categories.map(c => `<span class="text-[10px] px-2 py-1 bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 rounded-full font-bold shadow-sm">${c}</span>`).join('');
+        
+        $('modalUnits').innerHTML = currentProduct.units.map((u, idx) => `
+            <label class="flex items-center justify-between p-3 rounded-xl border-2 cursor-pointer transition-all border-gray-200 dark:border-slate-700 hover:border-emerald-500 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-500/10 has-[:checked]:shadow-md transform hover:-translate-y-0.5">
+                <span class="font-bold flex items-center gap-2 text-sm sm:text-base text-slate-800 dark:text-gray-100">
+                    <i class="fas fa-cubes text-emerald-500"></i> 
+                    ${u.name} <span class="text-gray-400 text-xs sm:text-sm font-normal">(${u.qty} ${t('piece')})</span>
+                </span>
+                <input type="radio" name="modalUnit" value="${idx}" ${idx === 0 ? 'checked' : ''} onchange="selectUnit(${idx})" class="w-5 h-5 accent-emerald-500 focus-visible:ring-2">
+            </label>
+        `).join('');
+        
+        selectUnit(0);
+        $('modalQty').value = 1;
+        
+        const btn = $('addToCartBtn');
+        const icon = btn.querySelector('i');
+        btn.classList.replace('bg-green-600', 'bg-emerald-500');
+        icon.className = 'fas fa-cart-plus text-xl';
+        $('addToCartText').innerText = t('add_to_cart');
+        
+        openModal('productModal');
+    }
+
+    function selectUnit(idx) { 
+        if (currentProduct?.units[idx]) selectedUnit = currentProduct.units[idx]; 
+    }
+
+    function changeModalQty(delta) {
+        triggerVibration(20);
+        const input = $('modalQty');
+        input.value = Math.max(1, (parseInt(input.value) || 1) + delta);
+    }
+
+    function animateBadge() {
+        const badge = $('cartBadge');
+        const icon = $('cartIconAnim');
+        badge.classList.remove('badge-pop');
+        void badge.offsetWidth; 
+        badge.classList.add('badge-pop');
+        icon.classList.add('scale-125');
+        setTimeout(() => icon.classList.remove('scale-125'), 300);
+    }
+
+    function addToCartFromModal() {
+        triggerVibration(50);
+        const qty = parseInt($('modalQty').value) || 1;
+        if (!currentProduct || !selectedUnit) return;
+        
+        const existingIndex = cart.findIndex(item => item.name === currentProduct.name && item.unit.name === selectedUnit.name);
+        if(existingIndex > -1) {
+            cart[existingIndex].qty += qty;
+        } else {
+            cart.push({ 
+                id: currentProduct.id + Date.now(), 
+                name: currentProduct.name, 
+                originalImg: currentProduct.originalImg,
+                img: getOptimizedImage(currentProduct.originalImg, IMG_W.cart), // Right-sized for the cart thumbnail
+                unit: selectedUnit, 
+                qty 
+            });
+        }
+        
+        storage.set('alnada_cart', cart);
+        renderCart();
+        
+        const btn = $('addToCartBtn');
+        const icon = btn.querySelector('i');
+        btn.classList.replace('bg-emerald-500', 'bg-green-600');
+        icon.className = 'fas fa-check text-xl';
+        $('addToCartText').innerText = t('added_success');
+        
+        setTimeout(() => closeModal('productModal'), 600);
+        animateBadge();
+    }
+
+    function changeCartQty(index, delta) {
+        triggerVibration(20);
+        if (!cart[index]) return;
+        cart[index].qty += delta;
+        if (cart[index].qty < 1) cart.splice(index, 1);
+        storage.set('alnada_cart', cart);
+        renderCart();
+    }
+
+    function removeFromCart(index) {
+        triggerVibration(40);
+        cart.splice(index, 1);
+        storage.set('alnada_cart', cart);
+        renderCart();
+    }
+
+    function toggleCart() { renderCart(); openModal('cartDrawer'); }
+
+    function openCheckoutModal() {
+        if (cart.length === 0) { showToast(t('empty_cart_warn')); return; }
+        closeModal('cartDrawer');
+        setTimeout(() => openModal('checkoutModal'), 100);
+    }
+
+    function shareProduct() {
+        if (navigator.share && currentProduct) {
+            navigator.share({
+                title: currentProduct.name,
+                text: `${t('brand_name')} - ${currentProduct.name}`,
+                url: window.location.href
+            }).catch(console.warn);
+        } else {
+            navigator.clipboard.writeText(window.location.href);
+            showToast(t('link_copied'));
+        }
+    }
+
+    // ==========================================
+    // 11. STRICT WHATSAPP FORMATTING
+    // ==========================================
+    function sendWhatsAppOrder() {
+        const methodNode = document.querySelector('input[name="deliveryMethod"]:checked');
+        if (!methodNode) return;
+        
+        const method = methodNode.value;
+        const methodText = method === 'pickup' ? (currentLang === 'ar' ? 'الاستلام من المحل' : 'Store Pickup') : (currentLang === 'ar' ? 'توصيل للمنزل' : 'Home Delivery');
+        
+        let msg = "";
+        cart.forEach(item => {
+            msg += `${item.qty} ${item.unit.name} ${item.name}\n`;
+        });
+        msg += `\nطريقة الاستلام: ${methodText}`;
+
+        window.open(`https://wa.me/201112611103?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+        
+        cart = [];
+        storage.set('alnada_cart', cart);
+        renderCart();
+        closeModal('checkoutModal');
+    }
+
+    let toastTimeout;
+    function showToast(msg) {
+        const toast = $('toast');
+        $('toastMsg').innerText = msg;
+        
+        clearTimeout(toastTimeout); 
+        toast.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+        toast.classList.add('opacity-100', 'translate-y-0');
+        
+        toastTimeout = setTimeout(() => {
+            toast.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+            toast.classList.remove('opacity-100', 'translate-y-0');
+        }, 3000);
+    }
+
+    // ==========================================
+    // 12. DRAG-TO-SCROLL
+    // ==========================================
+    function initDragScroll() {
+        const slider = $('categoryList');
+        if (!slider) return;
+        let isDown = false, startX, scrollLeft, hasMoved = false;
+
+        const start = (e) => {
+            isDown = true;
+            hasMoved = false;
+            slider.classList.add('drag-armed');
+            const pageX = e.touches ? e.touches[0].pageX : e.pageX;
+            startX = pageX - slider.getBoundingClientRect().left;
+            scrollLeft = slider.scrollLeft;
+        };
+
+        const move = (e) => {
+            if (!isDown) return;
+            const pageX = e.touches ? e.touches[0].pageX : e.pageX;
+            const walk = (pageX - slider.getBoundingClientRect().left - startX) * 1.5; 
+            if (Math.abs(walk) > 5) {
+                if (!hasMoved) slider.classList.add('dragging'); // now, and only now, disable pointer-events on chips
+                hasMoved = true;
+                if (e.cancelable) e.preventDefault(); 
+                slider.scrollLeft = scrollLeft - walk;
+            }
+        };
+
+        const end = () => { isDown = false; slider.classList.remove('drag-armed', 'dragging'); };
+
+        slider.addEventListener('mousedown', start);
+        slider.addEventListener('touchstart', start, { passive: true });
+        slider.addEventListener('mousemove', move);
+        slider.addEventListener('touchmove', move, { passive: false });
+        ['mouseup', 'mouseleave', 'touchend'].forEach(evt => slider.addEventListener(evt, end));
+        slider.addEventListener('click', (e) => {
+            if (hasMoved) { e.preventDefault(); e.stopPropagation(); hasMoved = false; }
+        }, true);
+    }
+
+    // ==========================================
+    // 13. INITIALIZATION
+    // ==========================================
+    function init() {
+        updateUI(); 
+        fetchProducts(); 
+        initDragScroll();
+    }
+
+    init();
+</script>
+</body>
+</html>
