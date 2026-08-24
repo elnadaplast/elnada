@@ -9,13 +9,13 @@
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="1000412269_2.jpg">
 
-    <!-- تحسينات الاتصال المسبق لتسريع تحميل الموارد -->
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS with Advanced Custom Config -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -25,232 +25,474 @@
                     fontFamily: { 
                         'ar': ['Cairo', 'sans-serif'],
                         'en': ['Poppins', 'sans-serif']
-                    } 
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
                 } 
             }
         }
     </script>
 
-    <!-- استدعاء آمن ومضمون لمكتبة الأيقونات (تم الإصلاح لتجنب اختفاء أي أيقونة) -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- استدعاء خطوط Google (تم إرجاع خط Poppins للغة الإنجليزية بجانب Cairo) -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Poppins:wght@400;600;800&display=swap">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Poppins:wght@400;600;700;800&display=swap">
 
-    <!-- تخصيص لون شريط المتصفح العلوي في الجوال -->
     <meta name="theme-color" content="#f8fafc">
 
     <style>
-        /* ============ إعدادات المظهر ============ */
+        /* ============ Scrollbar & Selection ============ */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .dark ::-webkit-scrollbar-thumb { background: #475569; }
+        ::selection { background: #3b82f6; color: white; }
+
+        /* ============ Core Settings ============ */
         html { color-scheme: light; scroll-behavior: smooth; }
         html.dark { color-scheme: dark; }
-
-        /* ============ التحكم باللغات ============ */
-        .lang-en { display: none; }
-        html[lang="en"] .lang-ar { display: none; }
-        html[lang="en"] .lang-en { display: inline; }
-
-        /* ============ الأساسيات ============ */
         body {
             background-color: #f8fafc;
             -webkit-font-smoothing: antialiased;
-            transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
-        .dark body { background-color: #0f172a; }
+        .dark body { background-color: #0b1120; }
 
-        /* ============ الشريط العلوي الزجاجي ============ */
-        .nav-glass {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
-            transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .dark .nav-glass { background: rgba(30, 41, 59, 0.75); }
+        /* ============ Language Display Logic ============ */
+        .lang-en { display: none; }
+        html[lang="en"] .lang-ar { display: none; }
+        html[lang="en"] .lang-en { display: inline-block; }
 
-        @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-            .nav-glass { background: rgba(248, 250, 252, 0.97); }
-            .dark .nav-glass { background: rgba(15, 23, 42, 0.97); }
+        /* ============ Glassmorphism ============ */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px) saturate(200%);
+            -webkit-backdrop-filter: blur(20px) saturate(200%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass-header { 
+            background: rgba(15, 23, 42, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* ============ الكروت (بتأثيرات محسنة للأداء) ============ */
-        .section-card {
-            background: #fff;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                        box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                        background-color 0.3s ease;
-            will-change: transform;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .section-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
         }
-        .dark .section-card { background: #1e293b; }
+        .dark .glass-card { 
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid rgba(51, 65, 85, 0.8);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+        }
 
-        /* ============ حركات الدخول ============ */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .hero-enter { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-
-        /* دعم وضع تقليل الحركة (لمن يفضله من المستخدمين) */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.001ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.001ms !important;
-            }
-            html { scroll-behavior: auto; }
-            .hero-enter { opacity: 1; transform: none; }
-        }
+        /* Delay utilities for animations */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
     </style>
 </head>
-<body class="font-ar text-gray-900 dark:text-gray-100 pb-10 transition-colors duration-300">
+<body class="font-ar text-slate-800 dark:text-slate-200 relative">
+
+    <!-- Background Decorative Blobs -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-blob dark:opacity-20 dark:bg-blue-600"></div>
+        <div class="absolute top-[20%] right-[-10%] w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-blob animation-delay-2000 dark:opacity-20 dark:bg-purple-600"></div>
+        <div class="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-green-400 rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-blob animation-delay-4000 dark:opacity-10 dark:bg-emerald-600"></div>
+    </div>
 
     <!-- Sticky Header -->
-    <header class="nav-glass fixed top-0 w-full z-50 border-b border-gray-200 dark:border-gray-700 p-4 transition-colors">
-        <div class="max-w-5xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold tracking-tight">الندى بلاست</h1>
-            <div class="flex items-center gap-3 shrink-0">
-                <button type="button" data-action="toggle-theme" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300" aria-label="Toggle Theme">
-                    <i id="theme-icon" class="fa-solid fa-moon"></i>
-                </button>
-                <button type="button" data-action="toggle-lang" class="px-4 py-1.5 bg-blue-600 text-white rounded-lg text-sm font-bold hover:bg-blue-700 hover:scale-105 transition-all duration-300 shadow-sm">
-                    <span id="lang-btn">English</span>
-                </button>
+    <header class="glass-header fixed top-0 w-full z-50 transition-colors duration-500 py-3">
+        <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+            <h1 class="text-2xl md:text-3xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-cyan-600 dark:from-blue-400 dark:to-cyan-300">
+                الندى بلاست
+            </h1>
+            <div class="flex items-center gap-4 shrink-0">
+                <!-- Theme Toggle -->
+                <div class="flex flex-col items-center group">
+                    <button type="button" data-action="toggle-theme" class="w-12 h-12 flex items-center justify-center rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all duration-300 shadow-sm" aria-label="Toggle Theme">
+                        <i id="theme-icon" class="fa-solid fa-moon text-xl text-slate-700 dark:text-amber-400 transition-transform duration-500"></i>
+                    </button>
+                    <span class="text-[11px] text-slate-500 dark:text-slate-400 font-bold mt-1 opacity-80 group-hover:opacity-100 transition-opacity text-center leading-tight">
+                        <span class="lang-ar">(تغيير اللون)</span><span class="lang-en">(Color)</span>
+                    </span>
+                </div>
+                <!-- Language Toggle -->
+                <div class="flex flex-col items-center group">
+                    <button type="button" data-action="toggle-lang" class="px-5 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl text-sm font-bold hover:shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 transition-all duration-300">
+                        <span id="lang-btn">English</span>
+                    </button>
+                    <span class="text-[11px] text-slate-500 dark:text-slate-400 font-bold mt-1 opacity-80 group-hover:opacity-100 transition-opacity text-center leading-tight">
+                        <span class="lang-ar">(تغيير اللغة)</span><span class="lang-en">(Language)</span>
+                    </span>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <main class="max-w-5xl mx-auto pt-28 px-6 pb-12">
-        <section class="hero-enter flex flex-col md:flex-row items-center gap-8 mb-16">
-            <div class="flex-1">
-                <img src="1000412269_2.jpg" alt="Logo" fetchpriority="high" decoding="async" class="w-48 h-48 rounded-3xl shadow-2xl mx-auto md:mx-0 hover:scale-105 hover:rotate-3 transition-transform duration-500 object-cover">
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto pt-32 px-6 pb-16">
+        
+        <!-- Hero Section -->
+        <section class="opacity-0 animate-fade-in-up flex flex-col lg:flex-row items-center gap-12 mb-20 relative">
+            <!-- Image -->
+            <div class="flex-1 w-full max-w-sm lg:max-w-none relative z-10">
+                <div class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-[3rem] blur-2xl opacity-40 animate-pulse-slow"></div>
+                <img src="1000412269_2.jpg" alt="Al-Nada Plast Logo" fetchpriority="high" class="w-full aspect-square object-cover rounded-[3rem] shadow-2xl relative z-10 border-8 border-white dark:border-slate-800 animate-float">
             </div>
-            <div class="flex-1 text-center md:text-right">
-                <h2 class="text-4xl font-extrabold mb-4 leading-tight">
-                    <span class="lang-ar">الندى بلاست - للتجارة والتوزيع</span>
-                    <span class="lang-en">Al-Nada Plast - Trading & Distribution</span>
+            
+            <!-- Text & Buttons -->
+            <div class="flex-[1.5] text-center lg:text-start z-10">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-bold text-sm mb-6 border border-blue-200 dark:border-blue-800/50">
+                    <i class="fa-solid fa-medal"></i>
+                    <span class="lang-ar">خبرة منذ عام 1996</span>
+                    <span class="lang-en">Experience Since 1996</span>
+                </div>
+                
+                <h2 class="text-4xl lg:text-6xl font-black mb-6 leading-[1.2] text-slate-900 dark:text-white">
+                    <span class="lang-ar">الندى بلاست <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">للتجارة والتوزيع</span></span>
+                    <span class="lang-en">Al-Nada Plast <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">Trading & Distribution</span></span>
                 </h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                
+                <!-- إرجاع النص الأصلي بالكامل كما طلب المستخدم -->
+                <p class="text-lg lg:text-xl text-slate-600 dark:text-slate-300 mb-10 leading-relaxed font-semibold max-w-2xl mx-auto lg:mx-0">
                     <span class="lang-ar">نحن متخصصون في توفير أفضل حلول مواد التعبئة والتغليف والمطبوعات الورقية عالية الجودة منذ عام 1996. التزامنا هو تقديم خدمة متميزة لعملائنا في كافة أنحاء الجمهورية.</span>
                     <span class="lang-en">We specialize in providing high-quality packaging solutions and paper prints since 1996. Our commitment is to offer excellent service to our clients nationwide.</span>
                 </p>
-                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-                    <a href="https://maps.app.goo.gl/azVw1khGMuYoV8xd9" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-red-500 text-white rounded-xl font-bold flex items-center gap-2 hover:bg-red-600 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-red-500/30">
-                        <i class="fa-solid fa-location-dot"></i> <span class="lang-ar">موقعنا</span><span class="lang-en">Location</span>
-                    </a>
-                    <a href="https://elnadaplast.github.io/store/" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-green-600 text-white rounded-xl font-bold flex items-center gap-2 hover:bg-green-700 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-green-600/30">
-                        <i class="fa-solid fa-cart-shopping"></i> <span class="lang-ar">متجرنا الإلكتروني</span><span class="lang-en">Online Shop</span>
-                    </a>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
+                    <!-- Location Button -->
+                    <div class="flex flex-col items-center sm:items-start gap-2">
+                        <a href="https://maps.app.goo.gl/azVw1khGMuYoV8xd9" target="_blank" rel="noopener noreferrer" class="group relative px-8 py-4 bg-gradient-to-r from-rose-500 to-red-600 text-white rounded-2xl font-bold text-lg flex items-center gap-3 overflow-hidden shadow-lg shadow-red-500/30 hover:shadow-red-500/50 hover:-translate-y-1 transition-all w-full sm:w-auto justify-center">
+                            <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                            <i class="fa-solid fa-map-location-dot text-2xl relative z-10"></i> 
+                            <span class="relative z-10 lang-ar">موقعنا على الخريطة</span>
+                            <span class="relative z-10 lang-en">Our Location</span>
+                        </a>
+                        <span class="text-[13px] text-slate-500 dark:text-slate-400 font-bold flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
+                            <i class="fa-solid fa-hand-pointer text-red-500"></i>
+                            <span class="lang-ar">اضغط لفتح خرائط جوجل ومعرفة مكاننا</span>
+                            <span class="lang-en">Click to open Google Maps to find us</span>
+                        </span>
+                    </div>
+
+                    <!-- Store Button -->
+                    <div class="flex flex-col items-center sm:items-start gap-2">
+                        <a href="https://elnadaplast.github.io/store/" target="_blank" rel="noopener noreferrer" class="group relative px-8 py-4 bg-gradient-to-r from-emerald-500 to-green-600 text-white rounded-2xl font-bold text-lg flex items-center gap-3 overflow-hidden shadow-lg shadow-green-500/30 hover:shadow-green-500/50 hover:-translate-y-1 transition-all w-full sm:w-auto justify-center">
+                            <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                            <i class="fa-solid fa-store text-2xl relative z-10"></i> 
+                            <span class="relative z-10 lang-ar">متجرنا الإلكتروني</span>
+                            <span class="relative z-10 lang-en">Our Online Shop</span>
+                        </a>
+                        <span class="text-[13px] text-slate-500 dark:text-slate-400 font-bold flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
+                            <i class="fa-solid fa-hand-pointer text-green-500"></i>
+                            <span class="lang-ar">اضغط لفتح المتجر ورؤية جميع المنتجات</span>
+                            <span class="lang-en">Click to open store and view products</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIP Section: Special Orders & Support (At the top as requested) -->
+        <section class="opacity-0 animate-fade-in-up delay-100 mb-20">
+            <div class="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-950 text-white shadow-2xl shadow-blue-900/20 border border-blue-800/50">
+                <!-- Background Pattern -->
+                <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+                
+                <div class="relative z-10 p-8 lg:p-12 flex flex-col lg:flex-row items-center justify-between gap-10">
+                    <div class="flex-1 text-center lg:text-start">
+                        <div class="inline-block px-4 py-1.5 bg-amber-500/20 text-amber-300 rounded-full text-sm font-bold mb-4 border border-amber-500/30">
+                            <i class="fa-solid fa-star mr-1"></i> <span class="lang-ar">خدمة مخصصة كلياً</span><span class="lang-en">Fully Customized Service</span>
+                        </div>
+                        <h3 class="text-3xl lg:text-4xl font-black mb-4 text-white">
+                            <span class="lang-ar">الطلبات الخاصة والطباعة والأختام</span>
+                            <span class="lang-en">Special Orders, Printing & Stamps</span>
+                        </h3>
+                        <p class="text-lg text-blue-100/90 leading-relaxed font-semibold max-w-2xl">
+                            <span class="lang-ar">نقدم خدمات استثنائية تشمل <span class="text-amber-300">الطباعة على الأكياس والشنط</span> بجميع أنواعها ومقاساتها، بالإضافة إلى <span class="text-amber-300">صناعة الأختام</span> بدقة عالية. كما نرحب دائماً بالدعم والمقترحات لتطوير أعمالكم.</span>
+                            <span class="lang-en">We offer exceptional services including <span class="text-amber-300">printing on bags and sacks</span> of all types, and high-precision <span class="text-amber-300">stamp making</span>. We also welcome your support and suggestions.</span>
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-col items-center w-full lg:w-auto shrink-0 bg-white/5 p-6 rounded-[2rem] border border-white/10 backdrop-blur-md">
+                        <button type="button" data-action="open-modal" data-number="01044200023" class="w-full px-10 py-5 bg-amber-400 hover:bg-amber-300 text-slate-900 rounded-2xl font-black text-xl lg:text-2xl flex items-center justify-center gap-3 transition-all hover:scale-105 shadow-xl shadow-amber-400/20">
+                            <i class="fa-solid fa-headset"></i> 01044200023
+                        </button>
+                        <div class="mt-4 text-center">
+                            <span class="text-sm text-blue-200 font-bold flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-hand-pointer text-amber-400"></i>
+                                <span class="lang-ar">اضغط هنا للاتصال المباشر أو إرسال واتساب</span>
+                                <span class="lang-en">Click here to Call or WhatsApp</span>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Services Grid -->
-        <section class="grid md:grid-cols-2 gap-6 mb-16">
-            <!-- Delivery -->
-            <div class="section-card p-6 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700 flex flex-col">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
-                        <i class="fa-solid fa-truck-fast text-2xl text-orange-500"></i>
-                    </div>
-                    <h3 class="text-xl font-bold"><span class="lang-ar">الطلب والتوصيل</span><span class="lang-en">Orders & Delivery</span></h3>
+        <section class="opacity-0 animate-fade-in-up delay-200 grid md:grid-cols-2 gap-8 mb-20">
+            <!-- Delivery Card -->
+            <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] flex flex-col relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl -z-10 group-hover:bg-orange-500/20 transition-colors duration-500"></div>
+                
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-400 to-red-500 text-white flex items-center justify-center shadow-lg shadow-orange-500/30 mb-6 shrink-0">
+                    <i class="fa-solid fa-truck-fast text-3xl"></i>
                 </div>
-                <p class="mb-4 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                
+                <h3 class="text-3xl font-black mb-4 text-slate-900 dark:text-white">
+                    <span class="lang-ar">الطلب والتوصيل</span>
+                    <span class="lang-en">Orders & Delivery</span>
+                </h3>
+                
+                <!-- استرجاع النص القديم بالضبط -->
+                <p class="text-lg text-slate-600 dark:text-slate-400 mb-6 font-semibold leading-relaxed">
                     <span class="lang-ar">لخدمة التوصيل السريع والمتابعة، يرجى التواصل معنا عبر الرقم التالي:</span>
-                    <span class="lang-en">For fast delivery services, please contact us at the following number:</span>
+                    <span class="lang-en">For fast delivery services and tracking, please contact us at the following number:</span>
                 </p>
-                <div class="mb-5 p-3 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-100 dark:border-green-800/30 flex items-center gap-3">
-                    <i class="fa-solid fa-gift text-green-500 text-lg animate-bounce"></i>
-                    <span class="font-bold text-green-700 dark:text-green-400 text-sm">
+                
+                <!-- النص القديم للتوصيل المجاني -->
+                <div class="mb-8 p-5 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl border border-emerald-200 dark:border-emerald-800/50 flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-800/50 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-gift text-emerald-600 dark:text-emerald-400 text-xl animate-bounce"></i>
+                    </div>
+                    <span class="font-black text-emerald-800 dark:text-emerald-300 text-lg">
                         <span class="lang-ar">توصيل مجاني لمره اسبوعيا لجميع الأحياء</span>
                         <span class="lang-en">Free weekly delivery to all neighborhoods</span>
                     </span>
                 </div>
-                <button type="button" data-action="open-modal" data-number="01112611103" class="w-full mt-auto py-3 bg-gray-900 dark:bg-white dark:text-gray-900 text-white rounded-xl font-bold text-lg hover:bg-gray-700 hover:scale-[1.02] transition-all duration-300 shadow-md">
-                    01112611103
-                </button>
+                
+                <div class="mt-auto flex flex-col gap-3">
+                    <button type="button" data-action="open-modal" data-number="01112611103" class="w-full py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-black text-xl hover:bg-blue-600 dark:hover:bg-blue-500 dark:hover:text-white transition-all duration-300 shadow-md flex justify-center items-center gap-3">
+                        <i class="fa-solid fa-phone-volume"></i> 01112611103
+                    </button>
+                    <span class="text-sm text-center text-slate-500 dark:text-slate-400 font-bold flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-hand-pointer text-slate-400"></i>
+                        <span class="lang-ar">اضغط هنا للتواصل مع مسؤول التوصيل</span>
+                        <span class="lang-en">Click here to contact delivery agent</span>
+                    </span>
+                </div>
             </div>
 
-            <!-- Sales -->
-            <div class="section-card p-6 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700 flex flex-col">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
-                        <i class="fa-solid fa-handshake text-2xl text-blue-500"></i>
-                    </div>
-                    <h3 class="text-xl font-bold"><span class="lang-ar">المبيعات والمشتريات</span><span class="lang-en">Sales & Purchasing</span></h3>
+            <!-- Sales Card -->
+            <div class="glass-card p-8 lg:p-10 rounded-[2.5rem] flex flex-col relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl -z-10 group-hover:bg-blue-500/20 transition-colors duration-500"></div>
+                
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center shadow-lg shadow-blue-500/30 mb-6 shrink-0">
+                    <i class="fa-solid fa-handshake-angle text-3xl"></i>
                 </div>
-                <p class="mb-4 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                
+                <h3 class="text-3xl font-black mb-4 text-slate-900 dark:text-white">
+                    <span class="lang-ar">المبيعات والمشتريات</span>
+                    <span class="lang-en">Sales & Purchasing</span>
+                </h3>
+                
+                <!-- استرجاع النص القديم بالضبط -->
+                <p class="text-lg text-slate-600 dark:text-slate-400 mb-8 font-semibold leading-relaxed">
                     <span class="lang-ar">للاستفسارات التجارية، طلبات الجملة، أو التواصل مع قسم المبيعات:</span>
                     <span class="lang-en">For trade inquiries, wholesale orders, or sales support:</span>
                 </p>
-                <!-- تم تصحيح رقم قسم المبيعات هنا إلى 01044200023 -->
-                <button type="button" data-action="open-modal" data-number="01044200023" class="w-full mt-auto py-3 bg-gray-900 dark:bg-white dark:text-gray-900 text-white rounded-xl font-bold text-lg hover:bg-gray-700 hover:scale-[1.02] transition-all duration-300 shadow-md">
-                    01044200023
-                </button>
+                
+                <div class="mt-auto flex flex-col gap-3">
+                    <button type="button" data-action="open-modal" data-number="01044200023" class="w-full py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-black text-xl hover:bg-blue-600 dark:hover:bg-blue-500 dark:hover:text-white transition-all duration-300 shadow-md flex justify-center items-center gap-3">
+                        <i class="fa-solid fa-phone-volume"></i> 01044200023
+                    </button>
+                    <span class="text-sm text-center text-slate-500 dark:text-slate-400 font-bold flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-hand-pointer text-slate-400"></i>
+                        <span class="lang-ar">اضغط هنا للتواصل مع قسم المبيعات</span>
+                        <span class="lang-en">Click here to contact sales department</span>
+                    </span>
+                </div>
             </div>
         </section>
 
         <!-- Payments Section -->
-        <section class="mb-16">
-            <h3 class="text-2xl font-bold text-center mb-8"><span class="lang-ar">طرق الدفع المتاحة</span><span class="lang-en">Payment Methods</span></h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <section class="opacity-0 animate-fade-in-up delay-300 mb-20">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-black text-slate-900 dark:text-white mb-4">
+                    <span class="lang-ar">طرق الدفع الإلكتروني</span>
+                    <span class="lang-en">Digital Payment Methods</span>
+                </h3>
+                <p class="text-slate-600 dark:text-slate-400 font-bold text-lg">
+                    <span class="lang-ar">وفرنا لك أسهل وأسرع طرق الدفع لتسهيل تعاملاتك</span>
+                    <span class="lang-en">We provided the easiest and fastest payment methods</span>
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- InstaPay -->
-                <div class="section-card p-6 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700 text-center">
-                    <div class="text-4xl mb-4 text-purple-600 hover:scale-110 transition-transform duration-300"><i class="fa-solid fa-wallet"></i></div>
-                    <h4 class="text-lg font-bold mb-2">InstaPay (انستا باي)</h4>
-                    <p class="text-sm text-gray-500 mb-4 font-semibold tracking-wide" dir="ltr">01115949155</p>
-                    <a href="https://ipn.eg/C/Q/abdelnaby18/instapay?ISIGN=23052603MEUCIHyaG0WF5uuVOFh89P9/SUVcTD1tDGnywMjqlbrn3mESAiEAs6Nsk1CujAcE/zIKo2QuzeWQco50vBeiKZ14b+3Uk4Q=" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-3 bg-purple-600 text-white rounded-xl font-bold hover:bg-purple-700 hover:shadow-lg hover:shadow-purple-600/30 hover:-translate-y-1 transition-all duration-300">
-                        <span class="lang-ar">تحويل الآن</span><span class="lang-en">Transfer Now</span>
+                <div class="glass-card p-10 rounded-[2.5rem] text-center flex flex-col items-center relative overflow-hidden group border-b-4 border-b-purple-600">
+                    <div class="w-24 h-24 mb-6 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                        <i class="fa-solid fa-wallet text-5xl text-purple-600 dark:text-purple-400"></i>
+                    </div>
+                    <h4 class="text-3xl font-black mb-3 text-slate-900 dark:text-white">InstaPay <span class="text-xl text-slate-500 font-bold"><span class="lang-ar">(انستا باي)</span></span></h4>
+                    <p class="text-xl text-slate-600 dark:text-slate-300 mb-8 font-black tracking-widest bg-slate-100 dark:bg-slate-800 px-6 py-2 rounded-xl" dir="ltr">01115949155</p>
+                    
+                    <a href="https://ipn.eg/C/Q/abdelnaby18/instapay?ISIGN=23052603MEUCIHyaG0WF5uuVOFh89P9/SUVcTD1tDGnywMjqlbrn3mESAiEAs6Nsk1CujAcE/zIKo2QuzeWQco50vBeiKZ14b+3Uk4Q=" target="_blank" rel="noopener noreferrer" class="w-full max-w-xs py-4 bg-gradient-to-r from-purple-600 to-purple-800 text-white rounded-2xl font-bold text-xl hover:shadow-xl hover:shadow-purple-600/40 hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span class="lang-ar">التحويل عبر انستا باي</span><span class="lang-en">Transfer via InstaPay</span>
                     </a>
+                    <span class="text-[13px] text-slate-500 dark:text-slate-400 font-bold mt-4 flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800/50 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
+                        <i class="fa-solid fa-hand-pointer text-purple-500"></i>
+                        <span class="lang-ar">اضغط هنا لفتح تطبيق انستا باي وإتمام الدفع</span>
+                        <span class="lang-en">Click to open InstaPay app to complete payment</span>
+                    </span>
                 </div>
+
                 <!-- Vodafone Cash -->
-                <div class="section-card p-6 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700 text-center">
-                    <div class="text-4xl mb-4 text-red-600 hover:scale-110 transition-transform duration-300"><i class="fa-solid fa-money-bill-wave"></i></div>
-                    <h4 class="text-lg font-bold mb-2">Vodafone Cash (فودافون كاش)</h4>
-                    <p class="text-sm text-gray-500 mb-4 font-semibold tracking-wide" dir="ltr">01027760090</p>
-                    <button type="button" data-action="copy-or-call" data-number="01027760090" class="inline-block px-8 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700 hover:shadow-lg hover:shadow-red-600/30 hover:-translate-y-1 transition-all duration-300">
-                        <span class="lang-ar">الدفع الآن</span><span class="lang-en">Pay Now</span>
+                <div class="glass-card p-10 rounded-[2.5rem] text-center flex flex-col items-center relative overflow-hidden group border-b-4 border-b-red-600">
+                    <div class="w-24 h-24 mb-6 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                        <i class="fa-solid fa-money-bill-transfer text-5xl text-red-600 dark:text-red-400"></i>
+                    </div>
+                    <h4 class="text-3xl font-black mb-3 text-slate-900 dark:text-white">Vodafone Cash <span class="text-xl text-slate-500 font-bold"><span class="lang-ar">(فودافون كاش)</span></span></h4>
+                    <p class="text-xl text-slate-600 dark:text-slate-300 mb-8 font-black tracking-widest bg-slate-100 dark:bg-slate-800 px-6 py-2 rounded-xl" dir="ltr">01027760090</p>
+                    
+                    <button type="button" data-action="copy-or-call" data-number="01027760090" class="w-full max-w-xs py-4 bg-gradient-to-r from-red-600 to-red-800 text-white rounded-2xl font-bold text-xl hover:shadow-xl hover:shadow-red-600/40 hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-copy"></i>
+                        <span class="lang-ar">دفع عبر فودافون كاش</span><span class="lang-en">Pay via Vodafone Cash</span>
                     </button>
+                    <span class="text-[13px] text-slate-500 dark:text-slate-400 font-bold mt-4 flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800/50 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
+                        <i class="fa-solid fa-hand-pointer text-red-500"></i>
+                        <span class="lang-ar">اضغط هنا لنسخ الرقم أو الاتصال به للتحويل</span>
+                        <span class="lang-en">Click to copy number or call to transfer</span>
+                    </span>
                 </div>
             </div>
         </section>
 
-        <!-- Footer / Contact -->
-        <footer class="text-center p-8 bg-white dark:bg-gray-800 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700 transition-colors duration-300">
-            <h3 class="text-xl font-bold mb-4"><span class="lang-ar">للدعم والمقترحات</span><span class="lang-en">Support & Suggestions</span></h3>
-            <p class="mb-6 text-gray-600 dark:text-gray-400"><span class="lang-ar">نحن نهتم برأيك. لا تتردد في التواصل مع قسم الدعم مباشرة.</span><span class="lang-en">We value your opinion. Feel free to contact support directly.</span></p>
-
-            <button type="button" data-action="open-modal" data-number="01044200023" class="px-10 py-4 bg-gray-50 dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 rounded-2xl font-bold text-xl hover:border-blue-500 hover:text-blue-600 hover:scale-105 transition-all duration-300 flex mx-auto items-center gap-3 shadow-sm hover:shadow-md">
-                <i class="fa-solid fa-headset text-blue-600"></i> 01044200023
-            </button>
-
-            <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
-                <a href="https://www.facebook.com/share/1C1pKGFayp/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 font-bold flex items-center justify-center gap-2 transition-colors duration-300">
-                    <i class="fa-brands fa-facebook text-xl"></i> <span class="lang-ar">صفحتنا على فيسبوك</span><span class="lang-en">Facebook Page</span>
-                </a>
+        <!-- Footer / Original Support Section & Social -->
+        <footer class="glass-card p-10 rounded-[3rem] text-center mb-8 border-t-8 border-t-blue-600">
+            <!-- استرجاع نص الدعم الأصلي للفوتر أيضاً لضمان وجود كل شيء -->
+            <div class="max-w-2xl mx-auto mb-10">
+                <h3 class="text-2xl font-black mb-4 text-slate-900 dark:text-white">
+                    <span class="lang-ar">للدعم والمقترحات</span>
+                    <span class="lang-en">Support & Suggestions</span>
+                </h3>
+                <p class="text-lg text-slate-600 dark:text-slate-400 font-bold mb-6">
+                    <span class="lang-ar">نحن نهتم برأيك. لا تتردد في التواصل مع قسم الدعم مباشرة.</span>
+                    <span class="lang-en">We value your opinion. Feel free to contact support directly.</span>
+                </p>
+                
+                <div class="flex flex-col items-center">
+                    <button type="button" data-action="open-modal" data-number="01044200023" class="px-10 py-4 bg-slate-100 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl font-black text-2xl hover:border-blue-500 hover:text-blue-600 dark:hover:border-blue-400 dark:hover:text-blue-400 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 w-full sm:w-auto shadow-sm">
+                        <i class="fa-solid fa-headset text-blue-600 dark:text-blue-400"></i> 01044200023
+                    </button>
+                    <span class="text-[13px] text-slate-500 dark:text-slate-400 font-bold mt-3 flex items-center gap-1.5">
+                        <i class="fa-solid fa-hand-pointer text-blue-500"></i>
+                        <span class="lang-ar">اضغط هنا للتواصل مع الدعم الفني والمقترحات</span>
+                        <span class="lang-en">Click to contact technical support and suggestions</span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-slate-200 dark:border-slate-700/50">
+                <div class="flex flex-col items-center gap-3">
+                    <a href="https://www.facebook.com/share/1C1pKGFayp/" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3 px-8 py-4 bg-[#1877F2]/10 dark:bg-[#1877F2]/20 text-[#1877F2] dark:text-[#5c9dff] rounded-2xl font-black text-xl hover:bg-[#1877F2] hover:text-white transition-all border border-[#1877F2]/30">
+                        <i class="fa-brands fa-facebook text-3xl group-hover:scale-110 transition-transform"></i> 
+                        <span class="lang-ar">تابع صفحتنا على فيسبوك</span><span class="lang-en">Follow us on Facebook</span>
+                    </a>
+                    <span class="text-[13px] text-slate-500 dark:text-slate-400 font-bold flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700">
+                        <i class="fa-solid fa-hand-pointer text-[#1877F2]"></i>
+                        <span class="lang-ar">اضغط هنا لفتح صفحة الفيسبوك الخاصة بنا ومتابعة الجديد</span>
+                        <span class="lang-en">Click here to open our Facebook page and follow updates</span>
+                    </span>
+                </div>
+            </div>
+            <div class="mt-8 text-sm text-slate-400 font-bold">
+                © 2026 Al-Nada Plast. All Rights Reserved.
             </div>
         </footer>
     </main>
 
-    <!-- Action Modal: phone call vs WhatsApp -->
-    <div id="actionModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 transition-opacity duration-300" role="dialog" aria-modal="true" aria-labelledby="actionModalTitle">
-        <div id="actionModalPanel" class="bg-white dark:bg-gray-800 rounded-[2rem] p-8 w-full max-w-sm shadow-2xl transform scale-95 transition-transform duration-300 border border-gray-100 dark:border-gray-700">
-            <h3 id="actionModalTitle" class="text-center font-bold text-xl mb-6 text-gray-900 dark:text-white">اتصل بنا / Contact Us</h3>
-            <div class="space-y-4">
-                <a id="callLink" href="#" class="flex items-center gap-4 w-full bg-blue-600 text-white p-4 rounded-2xl font-bold hover:bg-blue-700 hover:scale-[1.02] transition-all shadow-md"><i class="fa-solid fa-phone text-xl"></i> اتصال | Call</a>
-                <a id="waLink" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 w-full bg-green-500 text-white p-4 rounded-2xl font-bold hover:bg-green-600 hover:scale-[1.02] transition-all shadow-md"><i class="fa-brands fa-whatsapp text-xl"></i> واتساب | WhatsApp</a>
-                <button type="button" data-action="close-modal" class="w-full text-gray-500 hover:text-red-500 mt-2 font-bold py-2 transition-colors">إلغاء | Cancel</button>
+    <!-- Super Premium Action Modal (Call / WhatsApp) -->
+    <div id="actionModal" class="hidden fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4 opacity-0 transition-opacity duration-300" role="dialog" aria-modal="true">
+        <div id="actionModalPanel" class="bg-white dark:bg-slate-800 rounded-[2.5rem] p-8 w-full max-w-sm shadow-2xl transform scale-90 transition-all duration-400 border border-slate-200 dark:border-slate-700">
+            
+            <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fa-solid fa-address-book"></i>
+            </div>
+            
+            <h3 class="text-center font-black text-2xl mb-8 text-slate-900 dark:text-white">
+                <span class="lang-ar">كيف تفضل التواصل معنا؟</span>
+                <span class="lang-en">How would you like to contact us?</span>
+            </h3>
+            
+            <div class="space-y-5">
+                <!-- Phone Call -->
+                <div class="flex flex-col items-center w-full">
+                    <a id="callLink" href="#" class="group flex items-center gap-4 w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white p-5 rounded-2xl font-black text-xl hover:shadow-lg hover:shadow-blue-600/30 hover:-translate-y-1 transition-all justify-center">
+                        <i class="fa-solid fa-phone-flip text-2xl group-hover:rotate-12 transition-transform"></i>
+                        <span class="lang-ar">مكالمة هاتفية</span><span class="lang-en">Phone Call</span>
+                    </a>
+                    <span class="text-xs text-slate-500 font-bold mt-2 text-center bg-slate-100 dark:bg-slate-700 px-3 py-1 rounded-md">
+                        <span class="lang-ar">(اضغط لإجراء مكالمة عادية الآن)</span>
+                        <span class="lang-en">(Click to make a regular call now)</span>
+                    </span>
+                </div>
+
+                <!-- WhatsApp -->
+                <div class="flex flex-col items-center w-full">
+                    <a id="waLink" href="#" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-4 w-full bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white p-5 rounded-2xl font-black text-xl hover:shadow-lg hover:shadow-green-600/30 hover:-translate-y-1 transition-all justify-center">
+                        <i class="fa-brands fa-whatsapp text-3xl group-hover:scale-110 transition-transform"></i>
+                        <span class="lang-ar">رسالة واتساب</span><span class="lang-en">WhatsApp Message</span>
+                    </a>
+                    <span class="text-xs text-slate-500 font-bold mt-2 text-center bg-slate-100 dark:bg-slate-700 px-3 py-1 rounded-md">
+                        <span class="lang-ar">(اضغط لفتح تطبيق الواتساب وإرسال رسالة)</span>
+                        <span class="lang-en">(Click to open WhatsApp and send message)</span>
+                    </span>
+                </div>
+                
+                <div class="w-full h-px bg-slate-200 dark:bg-slate-700 my-4"></div>
+
+                <!-- Cancel -->
+                <div class="flex flex-col items-center w-full">
+                    <button type="button" data-action="close-modal" class="w-full text-slate-500 hover:text-red-500 dark:hover:text-red-400 font-black py-3 transition-colors text-lg rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700">
+                        <span class="lang-ar">إلغاء وإغلاق النافذة</span><span class="lang-en">Cancel & Close</span>
+                    </button>
+                    <span class="text-[11px] text-slate-400 font-bold mt-1">
+                        <span class="lang-ar">(اضغط هنا للعودة للموقع)</span>
+                        <span class="lang-en">(Click here to return to site)</span>
+                    </span>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Toast -->
-    <div id="toast" role="status" aria-live="polite" aria-atomic="true" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 translate-y-24 opacity-0 transition-all duration-400 ease-out bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-8 py-4 rounded-full z-50 shadow-2xl font-bold flex items-center gap-3">
-        <i class="fa-solid fa-check-circle text-green-400"></i>
-        <span id="toastMsg">تم!</span>
+    <!-- Awesome Toast Notification -->
+    <div id="toast" role="status" aria-live="polite" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 translate-y-32 opacity-0 transition-all duration-500 cubic-bezier(0.68, -0.55, 0.265, 1.55) bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-5 rounded-2xl z-[150] shadow-2xl shadow-slate-900/50 dark:shadow-white/20 font-black flex items-center gap-4 min-w-[300px] border border-slate-700 dark:border-slate-200">
+        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-check text-white text-xl"></i>
+        </div>
+        <span id="toastMsg" class="text-lg">تم بنجاح!</span>
     </div>
 
     <script>
@@ -262,29 +504,30 @@
             const langBtn = document.getElementById('lang-btn');
             const themeIcon = document.getElementById('theme-icon');
             const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+            
+            // Modal Elements
             const modal = document.getElementById('actionModal');
             const modalPanel = document.getElementById('actionModalPanel');
             const callLink = document.getElementById('callLink');
             const waLink = document.getElementById('waLink');
+            
+            // Toast Elements
             const toast = document.getElementById('toast');
             const toastMsg = document.getElementById('toastMsg');
 
-            const THEME_BG = { light: '#f8fafc', dark: '#0f172a' };
-
+            const THEME_BG = { light: '#f8fafc', dark: '#0b1120' };
             let toastTimer = null;
-            let lastFocusedEl = null;
 
-            const isMobileDevice = () => /Android|iPhone/i.test(navigator.userAgent);
+            const isMobileDevice = () => /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
             const isArabic = () => root.lang !== 'en';
 
-            /* ---------- Language toggle (تم الإصلاح لدعم تغيير نوع الخط) ---------- */
+            /* ---------- Language Toggle ---------- */
             function toggleLang() {
                 const switchingToEnglish = isArabic();
                 root.lang = switchingToEnglish ? 'en' : 'ar';
                 root.dir = switchingToEnglish ? 'ltr' : 'rtl';
                 langBtn.textContent = switchingToEnglish ? 'العربية' : 'English';
-                
-                // تبديل الخطوط بين Cairo و Poppins ليتناسب مع اللغة
+
                 if (switchingToEnglish) {
                     body.classList.replace('font-ar', 'font-en');
                 } else {
@@ -292,44 +535,47 @@
                 }
             }
 
-            /* ---------- Theme toggle ---------- */
+            /* ---------- Theme Toggle ---------- */
             function toggleTheme() {
                 const isDark = root.classList.toggle('dark');
-
-                themeIcon.style.transform = 'rotate(360deg)';
+                
+                // Animation for icon
+                themeIcon.style.transform = 'scale(0.5) rotate(180deg)';
+                themeIcon.style.opacity = '0';
+                
                 setTimeout(() => {
                     themeIcon.classList.toggle('fa-moon');
                     themeIcon.classList.toggle('fa-sun');
-                    themeIcon.style.transform = 'none';
-                }, 150);
+                    themeIcon.style.transform = 'scale(1) rotate(0deg)';
+                    themeIcon.style.opacity = '1';
+                }, 200);
 
                 themeColorMeta?.setAttribute('content', isDark ? THEME_BG.dark : THEME_BG.light);
             }
 
-            /* ---------- Action modal (call / WhatsApp) ---------- */
+            /* ---------- Modal Handling ---------- */
             function openActionModal(number) {
-                lastFocusedEl = document.activeElement;
+                // Remove leading zero for WhatsApp international format for Egypt (+20)
+                const waNumber = number.startsWith('0') ? '20' + number.substring(1) : number;
+                
                 callLink.href = `tel:${number}`;
-                waLink.href = `https://wa.me/20${number.replace(/^0/, '')}`;
+                waLink.href = `https://wa.me/${waNumber}`;
 
                 modal.classList.remove('hidden');
+                // Allow display block to render before animating opacity/transform
                 requestAnimationFrame(() => {
                     modal.classList.remove('opacity-0');
-                    modalPanel.classList.replace('scale-95', 'scale-100');
+                    modalPanel.classList.replace('scale-90', 'scale-100');
                 });
-                callLink.focus();
             }
 
             function closeModal() {
                 modal.classList.add('opacity-0');
-                modalPanel.classList.replace('scale-100', 'scale-95');
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                    lastFocusedEl?.focus?.();
-                }, 300); 
+                modalPanel.classList.replace('scale-100', 'scale-90');
+                setTimeout(() => modal.classList.add('hidden'), 300); 
             }
 
-            /* ---------- Copy or call direct (Vodafone Cash) ---------- */
+            /* ---------- Copy/Call Logistics ---------- */
             async function copyOrCallDirect(number) {
                 if (isMobileDevice()) {
                     window.location.href = `tel:${number}`;
@@ -337,24 +583,24 @@
                 }
                 try {
                     await navigator.clipboard.writeText(number);
-                    showToast(isArabic() ? 'تم نسخ الرقم بنجاح!' : 'Number Copied!');
+                    showToast(isArabic() ? 'تم نسخ الرقم بنجاح، يمكنك لصقه الآن!' : 'Number copied successfully, ready to paste!');
                 } catch {
-                    showToast(isArabic() ? 'تعذر نسخ الرقم، حاول مرة أخرى' : 'Could not copy, please try again');
+                    showToast(isArabic() ? 'تعذر نسخ الرقم، يرجى المحاولة يدوياً' : 'Could not copy, please try manually');
                 }
             }
 
-            /* ---------- Toast ---------- */
+            /* ---------- Awesome Toast Notification ---------- */
             function showToast(message) {
                 toastMsg.textContent = message;
-                toast.classList.remove('translate-y-24', 'opacity-0');
+                toast.classList.remove('translate-y-32', 'opacity-0');
 
                 clearTimeout(toastTimer);
                 toastTimer = setTimeout(() => {
-                    toast.classList.add('translate-y-24', 'opacity-0');
-                }, 2500);
+                    toast.classList.add('translate-y-32', 'opacity-0');
+                }, 4000); // 4 seconds visibility
             }
 
-            /* ---------- Event delegation ---------- */
+            /* ---------- Event Delegation Setup ---------- */
             const actions = {
                 'toggle-theme': () => toggleTheme(),
                 'toggle-lang': () => toggleLang(),
@@ -369,15 +615,31 @@
                 actions[trigger.dataset.action]?.(trigger);
             });
 
-            // Close the modal when clicking its backdrop
+            // Close modal when clicking on the dark background
             modal.addEventListener('click', (event) => {
                 if (event.target === modal) closeModal();
             });
-
-            // Close the modal with Escape
+            
+            // Close modal on Escape key
             document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+                if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
             });
+
+            // Scroll animations setup (Simple Intersection Observer)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // Note: the animation classes are already applied and handled by Tailwind keyframes, 
+            // but we can pause them initially if we want true scroll-reveal. 
+            // Currently, they animate on load sequentially using `delay-X` classes for a smooth initial experience.
         })();
     </script>
 </body>
